@@ -127,7 +127,7 @@ const Commitee = () => {
            <p>Creative Designer(Lead)</p>
         </div>
         <div className='commitee-member'>
-           <img src={ProfileImg} alt="" />
+           <img src="	https://res.cloudinary.com/dpdq2a9fu/image/upload/v1673965496/1673965494775.jpg" alt="" />
            <Link to="/me/samiulshuvo"><h3>Samiul Azam Shuvo</h3></Link>
            <p>Creative Designer</p>
         </div>
@@ -147,7 +147,7 @@ const Commitee = () => {
            <p>Webmaster(Lead)</p>
         </div>
         <div className='commitee-member'>
-           <img src={ProfileImg} alt="" />
+           <img src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1673963220/1673963219325.jpg" alt="" />
            <Link to="/me/nayemhossain"><h3>Md. Nayem Hossain</h3></Link>
            <p>Webmaster</p>
         </div>
@@ -163,7 +163,7 @@ const Commitee = () => {
            <p>Event Coordinator</p>
         </div>
         <div className='commitee-member'>
-           <img src={ProfileImg} alt="" />
+           <img src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1673889949/1673889947450.jpg" alt="" />
            <Link to="/me/moozaheed"><h3>G. M. Mozahed</h3></Link>
            <p>Event Coordinator</p>
         </div>
@@ -173,7 +173,7 @@ const Commitee = () => {
            <p>Executive Member</p>
         </div>
         <div className='commitee-member'>
-           <img src={ProfileImg} alt="" />
+           <img src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1673966004/1673966002396.jpg" alt="" />
            <Link to="/me/imranulkhair"><h3>Imranul Khair</h3></Link>
            <p>Executive Member</p>
         </div>
@@ -218,7 +218,7 @@ const Commitee = () => {
            <p>Executive Member</p>
         </div>
         <div className='commitee-member'>
-           <img src={ProfileImg} alt="" />
+           <img src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1673964700/1673964698952.jpg" alt="" />
            <Link to="/me/mdsorowarmahabub"><h3>Md. Sorowar Mahabub Rabby</h3></Link>
            <p>Executive Member</p>
         </div>

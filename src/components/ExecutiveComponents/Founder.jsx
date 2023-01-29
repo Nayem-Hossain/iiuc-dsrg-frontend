@@ -39,10 +39,10 @@ International Islamic University Chittagong (IIUC), Bangladesh.</p>
         </div>
         <div className='publication-of-founder'>  
         <h2>Publication</h2>
-        <p>Google Scholar: <span><a href="https://https://scholar.google.com/citations?user=e2VQhc0AAAAJ">https://https://scholar.google.com/citations?user=e2VQhc0AAAAJ</a></span></p>
-        <p>ORCID:<span><a href="https://https://orcid.org/0000-0002-8740-2744">https://https://orcid.org/0000-0002-8740-2744</a></span></p>
-        <p>Research Gate:<span><a href="https://https://www.researchgate.net/profile/Shahidul-Khan">https://https://www.researchgate.net/profile/Shahidul-Khan</a></span></p>
-        <p>Scopus:<span><a href="https://https://www.scopus.com/authid/detail.uri?authorId=7404042760">https://https://www.scopus.com/authid/detail.uri?authorId=7404042760</a></span></p>
+        <p>Google Scholar: <span><a href="https://scholar.google.com/citations?user=e2VQhc0AAAAJ&hl=en">https://scholar.google.com/citations?user=e2VQhc0AAAAJ</a></span></p>
+        <p>ORCID:<span><a href="https://orcid.org/0000-0002-8740-2744">https://orcid.org/0000-0002-8740-2744</a></span></p>
+        <p>Research Gate:<span><a href="https://www.researchgate.net/profile/Shahidul-Khan">https://www.researchgate.net/profile/Shahidul-Khan</a></span></p>
+        <p>Scopus:<span><a href="https://www.scopus.com/authid/detail.uri?authorId=7404042760">https://www.scopus.com/authid/detail.uri?authorId=7404042760</a></span></p>
         <p></p>
         </div>
     </Container>

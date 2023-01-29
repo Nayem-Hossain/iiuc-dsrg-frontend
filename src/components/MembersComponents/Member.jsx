@@ -16,7 +16,7 @@ const Member = ({ member }) => {
           <div>
             <img src={member.profileImg || ProfileImg} alt={member.username} />
             <h5><Link to={`/me/${username}`}>{member.name}</Link></h5>
-           // <p>Student of {47}<sup>th</sup> batch</p>
+           {/* <p>Student of {47}<sup>th</sup> batch</p> */}
           </div>
           <button onClick={() => navigate(`/me/${username}`)} className="btn btn-outline-dark border border-1 border-dark rounded-pill" style={{ margin: "5px 0px" }}>View Profile</button>
         </div>
