@@ -15,23 +15,23 @@ const Partners = () => {
         <div> <h3 className='text-center'>Our Partners</h3></div>
         <Separator />
       </div>
-    <div className='partnersImg'>
-  <div className="partner">
-  <img style={{width:'200px',height:'100px'}} src={Leads} alt="partner"/>
-  </div>
-  <div className="partner">
-  <img style={{width:'200px',height:'100px'}} src={Devnet} alt="partner"/>
-  </div>
-  <div className="partner">
-  <img style={{width:'200px',height:'100px'}} src={BracIT} alt="partner"/>
-  </div>
-  <div className="partner">
-  <img style={{width:'100px',height:'100px'}} src={Washington} alt="partner"/>
-  </div>
-  <div className="partner">
-  <img style={{width:'200px',height:'100px'}} src={Esrd} alt="partner"/>
-  </div>
-    </div>
+      <div className='partnersImg'>
+        <div className="partner">
+          <img style={{ width: '200px', height: '100px' }} src={Leads} alt="partner" />
+        </div>
+        <div className="partner">
+          <img style={{ width: '200px', height: '100px' }} src={Devnet} alt="partner" />
+        </div>
+        <div className="partner">
+          <img style={{ width: '200px', height: '100px' }} src={BracIT} alt="partner" />
+        </div>
+        <div className="partner">
+          <img style={{ width: '100px', height: '100px' }} src={Washington} alt="partner" />
+        </div>
+        <div className="partner">
+          <img style={{ width: '200px', height: '100px' }} src={Esrd} alt="partner" />
+        </div>
+      </div>
     </Container>
   )
 }

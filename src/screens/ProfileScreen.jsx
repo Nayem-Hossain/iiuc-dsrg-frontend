@@ -1,6 +1,6 @@
 import React from 'react'
 import ProfileImg from '../components/assets/profileImg.jpg'
-import BrandImg from '../components/assets/brandImg.jpg'
+import BrandImg from '../components/assets/organizationImg.jpg'
 import BackgroundImg from '../components/assets/BackgroundImg.jpeg'
 import './css/styles.css'
 import WithLayout from '../Layout/WithLayout'

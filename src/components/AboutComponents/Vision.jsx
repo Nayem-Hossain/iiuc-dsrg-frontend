@@ -5,7 +5,7 @@ const Vision = () => {
   return (
    <Container className='vision'> 
          <div className='vision_content'>
-         <div className='title-div'>
+         <div className='title-div partners'>
               <Separator/>
         <div> <h3>Our Vision</h3></div>
          <Separator/>

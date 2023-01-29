@@ -7,7 +7,7 @@ import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useAppContext } from '../Context/userContext';
-import BrandImg from '../assets/brandImg.jpg'
+import BrandImg from '../assets/organizationImg.jpg'
 import BackgroundImg from '../assets/BackgroundImg.jpeg'
 import '../css/styles.css'
 
