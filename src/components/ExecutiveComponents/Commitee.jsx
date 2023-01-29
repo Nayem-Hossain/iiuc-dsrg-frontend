@@ -1,13 +1,95 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
-import ProfileImg from '../assets/profileImg.jpg'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Col, Container, Pagination, Row } from 'react-bootstrap';
+import ProfileImg from '../assets/profileImg.jpg';
+import { Link } from 'react-router-dom';
+import Separator from '../CommonComponents/Separator';
+
 const Commitee = () => {
-  return (
-    <>
-    <h3 className='text-center' style={{padding:"20px 0px",backgroundColor:"#f6f6f6"}}>Commitee Members</h3>
-    <Container>
-        <div className='commitee-members'>
+   return (
+      <>
+         <h1 className='text-center fw-bold p-5'>Commitee Members</h1>
+         <Container>
+
+            {/* chief and vice chief */}
+
+            <>
+
+               <div className='border-2 border-bottom border-dark-subtle'>
+                  <div className='row justify-content-center'>
+                     <div className='commitee-member'>
+                        <img src={ProfileImg} alt="" />
+                        <h3>Abid Ud Takey Emou</h3>
+                        <p>Chief</p>
+                     </div>
+                  </div>
+                  <div className='row'>
+                     {Array.from({ length: 2 }).map((_, idx) => (
+                        <div className='col'>
+                           <div className='commitee-member'>
+                              <img src={ProfileImg} alt="" />
+                              <h3>Robin</h3>
+                              <p>Vice Chief(Student Activity)</p>
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            </>
+
+            {/* Coordinator and Team Leaders  */}
+
+            <>
+               <div className='title-div partners my-5'>
+                  <Separator />
+                  <div> <h3 className='text-center'>Coordinator & Team Leaders</h3></div>
+                  <Separator />
+               </div>
+               <Row xs={1} md={4} className='g-4 border-2 border-bottom border-dark-subtle'>
+                  {Array.from({ length: 8 }).map((_, idx) => (
+                     <Col>
+                        <div className='commitee-member'>
+                           <img src={ProfileImg} alt="" />
+                           <h3>Abu Nowhash Chowdhury</h3>
+                           <p>Research &#38; Publication Coordinator</p>
+                        </div>
+                     </Col>
+                  ))}
+               </Row>
+            </>
+
+            {/* Executive Members */}
+            <>
+               <div className='title-div partners my-5'>
+                  <Separator />
+                  <div> <h3 className='text-center'>Executive Members</h3></div>
+                  <Separator />
+               </div>
+               <Row xs={1} md={5} className='g-4 border-2 border-bottom border-dark-subtle'>
+                  {Array.from({ length: 10 }).map((_, idx) => (
+                     <Col>
+                        <div className='commitee-member'>
+                           <img src={ProfileImg} alt="" />
+                           <h3>Md. Araf Bin Faiz</h3>
+                           <p>Executive Member(Finance)</p>
+                        </div>
+                     </Col>
+                  ))}
+               </Row>
+            </>
+            <div className='d-flex justify-content-center my-5'>
+               <Pagination className='p-2'>
+                  <Pagination.First>{"First"}</Pagination.First >
+                  <Pagination.Prev />
+                  <Pagination.Item active>{`2022-2023`}</Pagination.Item>
+                  <Pagination.Item>{`2022-2023`}</Pagination.Item>
+                  <Pagination.Item>{`2022-2023`}</Pagination.Item>
+                  <Pagination.Ellipsis />
+                  <Pagination.Item disabled>{`2022-2023`}</Pagination.Item>
+                  <Pagination.Next />
+                  <Pagination.Last>{"Last"}</Pagination.Last >
+               </Pagination>
+            </div>
+            {/* <div className='commitee-members'>
         <div className='commitee-member'>
            <img src={ProfileImg} alt="" />
            <h3>Abid Ud Takey Emou</h3>
@@ -160,10 +242,10 @@ const Commitee = () => {
            <h3>Afroza Sultana</h3>
            <p>Executive Member</p>
         </div>
-        </div>
-    </Container>
-</>
-  )
+        </div> */}
+         </Container>
+      </>
+   )
 }
 
 export default Commitee
