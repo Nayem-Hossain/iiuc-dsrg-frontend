@@ -35,7 +35,23 @@ console.log(userData)
 
 const [errorMessage, setErrorMessage] = useState('')
 const [successMessage, setSuccessMessage] = useState('')
-
+const [designation,setDesignation]=useState('')
+useEffect(()=>{
+  try {
+     const getCommitteeMembers = async () => {
+       const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
+       const isExecutive=response.data.find((d)=>d.username===member.username)
+       console.log("isEx")
+       console.log(isExecutive)
+       if(isExecutive)
+       setDesignation(isExecutive.designation);
+       else setDesignation('Member')
+     }
+     getCommitteeMembers()
+   } catch (error) {
+     console.log(error)
+   }
+},[member])
 
 const handleSubmit = async (e) => {
 
@@ -76,6 +92,16 @@ const handleChange = (e) => {
 }
 console.log("ok")
 console.log(memberDetails)
+
+
+memberDetails.jobs.sort(function(a, b) {
+  var dateA = new Date(a.startDate.split("-").reverse().join("-"));
+  var dateB = new Date(b.startDate.split("-").reverse().join("-"));
+  return dateB - dateA;
+});
+
+console.log(memberDetails.jobs);
+
   return (
    <>
    <Modal className="modal-class" show={show} onHide={handleClose}>
@@ -220,43 +246,19 @@ console.log(memberDetails)
                 <i className="fa-solid fa-pencil" />
                 <div className="name_and_school">
                   <h2>{memberDetails.name}</h2>
+                  {
+                    memberDetails.jobs.length>0 && memberDetails.jobs[0].endDate==="" &&
+                    <p>{memberDetails.jobs[0].designation} at {memberDetails.jobs[0].company}</p>
+                  }
                   <p>
-                    <img src={BrandImg} alt="#" />
-                    <span>IIUC Data Science Research Group</span> 
+                  {/*  <img src={BrandImg} alt="#" /> */}
+                { designation!=="" && <span>{designation},IIUC Data Science Research Group</span> }
                   </p>
                 </div>
-            
-               {/* <p>Chittagong,Bangladesh <a href="#">Contact info <br /> <br /></a>
-                </p> */}
-                <div className="profil_button">
-                  <div className="my_goal">Open to</div>
-                  <div className="new_section"> Add Profile Section</div>
-                  <div className="more">More</div>
-                </div>
-                <div className="profil_blocks" style={{margin:'10px 0px'}}>
-                  
-                </div>
+                <p style={{marginLeft:'80%',marginBottom:'10px'}} className='mail_to'><a  href={`mailto:${memberDetails.email}`}>Contact<i style={{paddingLeft:'2px',marginTop:'3px'}}  class="bi bi-envelope"></i></a></p>
               </div>
             </div>
-            <div className="infos" style={{paddingBottom:'10px'}}>
-          <div  className="card-body">
-            <div  className="h4 mt-0 title">Basic Information</div>
-            <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Email:</strong></div>
-              <div  className="col-sm-8">{memberDetails.email}</div>
-            </div>
-            <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Phone:</strong></div>
-              <div  className="col-sm-8">{memberDetails.phone}</div>
-              
-            </div>
-            <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Field of Interest:</strong></div>
-              <div  className="col-sm-8">{memberDetails.field_of_interest}</div>
-            </div>
-         
-          </div>
-        </div>
+            
             <div className="infos" style={{paddingBottom:'10px'}}>
               <div className="title"><h4>About</h4><i className="fa-solid fa-pen" /></div>
               <p>{memberDetails.description}</p>
@@ -275,13 +277,13 @@ console.log(memberDetails)
               </div>
 
               {
-      memberDetails.jobs && memberDetails.jobs.length>0 &&
+      memberDetails.jobs && memberDetails.jobs.length>0 && 
       memberDetails.jobs.map(job=>{
           console.log(job)
           return (
             (
               <>
-                 <p style={{marginBottom:'20px'}}><img src="https://i.f1g.fr/media/eidos/orig/2015/07/20/PHO81b3db84-2ec8-11e5-ad32-1d334e2eca66-805x453.jpg" alt="" />  &nbsp; <span>{job.designation}</span>  <br /> &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;{job.company}<br /> &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;{job.startDate} - {job.endDate}<br /></p>
+                 <p style={{marginBottom:'20px'}}><img src="https://i.f1g.fr/media/eidos/orig/2015/07/20/PHO81b3db84-2ec8-11e5-ad32-1d334e2eca66-805x453.jpg" alt="" />  &nbsp; <span>{job.designation}</span>  <br /> &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;{job.company}<br /> &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;[{job.startDate}] - [{job.endDate}]<br /></p>
            {/* <div  className="row">
               <div  className="col-md-3 job bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
                 <div  className="card-body cc-experience-header">
@@ -311,7 +313,9 @@ console.log(memberDetails)
                   <i className="fa-solid fa-pen" />
                 </span>
               </div>
-              <p><img src="./css/images/Jiangsu_Normal_University_logo.png" alt="" /><span> International Islamic University Chittagong </span><br />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;Bachelor of Engineering, Computer Science and Engineering <br />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;Activities at institution :</p>
+              <p><img src="./css/images/Jiangsu_Normal_University_logo.png" alt="" /><span> International Islamic University Chittagong </span><br />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;Bachelor of Engineering, Computer Science and Engineering <br />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;Activities at institution :
+              { designation!=="" && `Worked as ${designation} at IIUC Data Science Research Group`}
+                  </p>
             </div>
             <div className="infos" style={{paddingBottom:'10px'}}>
               <div className="title">
@@ -360,7 +364,25 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
                 <p>Fluent</p>
       </div> */}
             </div>
-           
+            <div className="infos" style={{paddingBottom:'10px'}}>
+          <div  className="card-body">
+            <div  className="h4 mt-0 title">Basic Information</div>
+           {/*   <div  className="row mt-3">
+              <div  className="col-sm-4"><strong  className="text-uppercase">Email:</strong></div>
+              <div  className="col-sm-8">{memberDetails.email}</div>
+    </div> */}
+         {/*   <div  className="row mt-3">
+              <div  className="col-sm-4"><strong  className="text-uppercase">Phone:</strong></div>
+              <div  className="col-sm-8">{memberDetails.phone}</div>
+              
+    </div> */}
+            <div  className="row mt-3">
+              <div  className="col-sm-4"><strong  className="text-uppercase">Field of Interest:</strong></div>
+              <div  className="col-sm-8">{memberDetails.field_of_interest}</div>
+            </div>
+         
+          </div>
+        </div>
           </section>
           
         </main>

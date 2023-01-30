@@ -1188,6 +1188,7 @@ a {
   align-items: flex-start;
   height: 5rem;
   width: 100%;
+  flex-direction: column;
   text-align: start;
 }
 .name_and_school h2 {
@@ -1296,7 +1297,6 @@ a {
 .infos p span:hover,
 .name_and_school p span:hover,
 .competence p:hover {
-  text-decoration: underline;
   cursor: pointer;
   color: #05396dee;
   /* color: #666666; */
@@ -3997,10 +3997,7 @@ body {
 
 /* Contact-Form Style Sheet nayem */
 
-body {
-  margin-top: 20px;
-  background: #eee;
-}
+
 .contact-area {
   background: url() no-repeat;
   background-attachment: fixed;

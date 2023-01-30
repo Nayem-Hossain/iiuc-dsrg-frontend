@@ -3,10 +3,74 @@ import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import ProfileImg from '../assets/profileImg.jpg';
 import { Link } from 'react-router-dom';
 import Separator from '../CommonComponents/Separator';
-
+import { useEffect } from 'react';
+import axios from 'axios'
+import { useState } from 'react';
+import Loader from '../CommonComponents/Loader';
 const Commitee = () => {
+  const [committee,setCommittee]=useState([])
+  const [members,setMembers]=useState([])
+  const [selectedSession,setSelectedSession]=useState("2022-2023")
+
+   useEffect(()=>{
+      try {
+         const getCommitteeMembers = async () => {
+           const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
+           const data=response.data.filter((d)=>d.session===selectedSession)
+           setCommittee(data)
+         }
+         getCommitteeMembers()
+       } catch (error) {
+         console.log(error)
+       }
+   },[])
+   useEffect(() => {
+      try {
+        const getMembers = async () => {
+          const response = await axios.get('https://gray-awful-newt.cyclic.app/api/members');
+          setMembers(response.data)
+        }
+        getMembers()
+      } catch (error) {
+        console.log(error)
+      }
+    }, [committee])
+   const chief=committee.find((m)=>m.designation.toLowerCase()==='chief' && m.section==='chief_and_vice-chief')
+   console.log("chief");
+   console.log(chief)
+   const Vice_chiefs=committee.filter((m)=>m.designation.toLowerCase()!=='chief' && m.section==='chief_and_vice-chief')
+   console.log("vice")
+   console.log(Vice_chiefs)
+   const Coordinators_and_leads=committee.filter((m)=>m.section==='coordinator_and_team-leader')
+   console.log("cor");
+   console.log(Coordinators_and_leads)
+   const Executives=committee.filter((m)=>m.section==='executive_member')
+   console.log("exe");
+   console.log(Executives)
+
+   console.log("members");
+   console.log(members)
+
+   const image_of_chief=members.find(m=>m.username===chief.username)?.profileImg
+   const vice_chief_img=Vice_chiefs.map((d)=>{
+      return members.find(m=>m.username===d.username)?.profileImg
+   })
+   const coord_leads_img=Coordinators_and_leads.map((d)=>{
+      return members.find(m=>m.username===d.username)?.profileImg
+   })
+
+   const executives_img=Executives.map((d)=>{
+      return members.find(m=>m.username===d.username)?.profileImg
+   })
+   
+   console.log("img")
+   console.log(vice_chief_img)
+   console.log(coord_leads_img)
+   console.log(executives_img)
    return (
-      <>
+      
+         committee && committee.length>0 && members && members.length>0?
+         <>
          <h1 className='text-center fw-bold p-5'>Commitee Members</h1>
          <Container>
 
@@ -17,18 +81,18 @@ const Commitee = () => {
                <div className='border-2 border-bottom border-dark-subtle'>
                   <div className='row justify-content-center'>
                      <div className='commitee-member'>
-                        <img src={ProfileImg} alt="" />
-                        <h3>Abid Ud Takey Emou</h3>
-                        <p>Chief</p>
+                        <img src={image_of_chief || ProfileImg} alt="" />
+                        <Link to={`/me/${chief.username}`}><h3>{chief.name}</h3></Link>
+                        <p>{chief.designation}</p>
                      </div>
                   </div>
                   <div className='row'>
-                     {Array.from({ length: 2 }).map((_, idx) => (
+                     {Vice_chiefs.map((vc, idx) => (
                         <div className='col'>
                            <div className='commitee-member'>
-                              <img src={ProfileImg} alt="" />
-                              <h3>Robin</h3>
-                              <p>Vice Chief(Student Activity)</p>
+                              <img src={vice_chief_img[idx]||ProfileImg} alt="" />
+                              <Link to={`/me/${vc.username}`}><h3>{vc.name}</h3></Link>
+                              <p>{vc.designation}</p>
                            </div>
                         </div>
                      ))}
@@ -45,12 +109,12 @@ const Commitee = () => {
                   <Separator />
                </div>
                <Row xs={1} md={4} className='g-4 border-2 border-bottom border-dark-subtle'>
-                  {Array.from({ length: 8 }).map((_, idx) => (
+                  {Coordinators_and_leads.map((d, idx) => (
                      <Col>
                         <div className='commitee-member'>
-                           <img src={ProfileImg} alt="" />
-                           <h3>Abu Nowhash Chowdhury</h3>
-                           <p>Research &#38; Publication Coordinator</p>
+                           <img src={coord_leads_img[idx]||ProfileImg} alt="" />
+                           <Link to={`/me/${d.username}`}><h3>{d.name}</h3></Link>
+                           <p>{d.designation}</p>
                         </div>
                      </Col>
                   ))}
@@ -65,12 +129,12 @@ const Commitee = () => {
                   <Separator />
                </div>
                <Row xs={1} md={5} className='g-4 border-2 border-bottom border-dark-subtle'>
-                  {Array.from({ length: 10 }).map((_, idx) => (
+                  {Executives.map((d, idx) => (
                      <Col>
                         <div className='commitee-member'>
-                           <img src={ProfileImg} alt="" />
-                           <h3>Md. Araf Bin Faiz</h3>
-                           <p>Executive Member(Finance)</p>
+                           <img src={executives_img[idx]||ProfileImg} alt="" />
+                           <Link to={`/me/${d.username}`}><h3>{d.name}</h3></Link>
+                           <p>{d.designation}</p>
                         </div>
                      </Col>
                   ))}
@@ -244,8 +308,11 @@ const Commitee = () => {
         </div>
         </div> */}
          </Container>
-      </>
+      </>:<Loader/>
+      
+      
    )
+
 }
 
 export default Commitee

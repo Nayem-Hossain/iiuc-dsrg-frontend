@@ -9,6 +9,11 @@ import PaginationComponent from '../components/CommonComponents/PaginationCompon
 
 const MembersScreen = () => {
   const [members, setMembers] = useState([])
+
+  const [currentPage,setCurrentPage]=useState(1)
+    const [membersPerPage]=useState(10)
+    
+
   useEffect(() => {
     try {
       const getMembers = async () => {
@@ -20,6 +25,17 @@ const MembersScreen = () => {
       console.log(error)
     }
   }, [])
+
+  
+    
+    const indexOfLastMember=currentPage*membersPerPage
+    const indexOfFirstMember=indexOfLastMember-membersPerPage
+    const curMembers=members.slice(indexOfFirstMember,indexOfLastMember)
+    console.log(curMembers)
+    const changePageNumber=(num)=>{
+        setCurrentPage(num);
+    }
+
   return (
     <div className='members-screen'>
       <ScrollToTop />
@@ -29,13 +45,15 @@ const MembersScreen = () => {
           <Container>
             <Row xs={1} sm={2} md={5} className='g-4'>
               {
-                members.map((member) => {
+                curMembers.map((member) => {
                   return <Member member={member} />
                 })
               }
             </Row>
             <div className='d-flex justify-content-center my-5'>
-              <PaginationComponent></PaginationComponent>
+             {/* <PaginationComponent></PaginationComponent> */}
+             {(members.length>0) && <PaginationComponent membersPerPage={membersPerPage} changePageNumber={changePageNumber}
+              totalMembers={members.length} currentPage={currentPage}/>}
             </div>
           </Container> : <Loader />
       }
