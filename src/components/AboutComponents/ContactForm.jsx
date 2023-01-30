@@ -33,7 +33,7 @@ const ContactForm = () => {
                             <div class="single_address">
                                 <i class="bi bi-stopwatch-fill"></i>
                                 <h4>Oncampus Meeting</h4>
-                                <p>Every Saturday : <br/> 12.00 PM- 01.30 PM.</p>
+                                <p>Every Saturday : <br /> 12.00 PM - 01.30 PM.</p>
                             </div>
                         </div>
 
