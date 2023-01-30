@@ -35,31 +35,36 @@ const Commitee = () => {
         console.log(error)
       }
     }, [committee])
-   const chief=committee.find((m)=>m.designation.toLowerCase()==='chief' && m.section==='chief_and_vice-chief')
+
+   const chief=committee && committee.length>0 &&
+   committee.find((m)=>m.designation.toLowerCase()==='chief' && m.section==='chief_and_vice-chief')
    console.log("chief");
    console.log(chief)
-   const Vice_chiefs=committee.filter((m)=>m.designation.toLowerCase()!=='chief' && m.section==='chief_and_vice-chief')
+   const Vice_chiefs=committee && committee.length>0 &&
+   committee.filter((m)=>m.designation.toLowerCase()!=='chief' && m.section==='chief_and_vice-chief')
    console.log("vice")
    console.log(Vice_chiefs)
-   const Coordinators_and_leads=committee.filter((m)=>m.section==='coordinator_and_team-leader')
+   const Coordinators_and_leads=committee && committee.length>0 && committee.filter((m)=>m.section==='coordinator_and_team-leader')
    console.log("cor");
    console.log(Coordinators_and_leads)
-   const Executives=committee.filter((m)=>m.section==='executive_member')
+   const Executives=committee && committee.length>0 && committee.filter((m)=>m.section==='executive_member')
    console.log("exe");
    console.log(Executives)
 
    console.log("members");
    console.log(members)
 
-   const image_of_chief=members.find(m=>m.username===chief.username)?.profileImg
-   const vice_chief_img=Vice_chiefs.map((d)=>{
+   const image_of_chief=members && members.length>0 && chief &&
+   members.find(m=>m.username===chief?.username)?.profileImg
+   const vice_chief_img=Vice_chiefs && Vice_chiefs.length>0 && 
+   Vice_chiefs.map((d)=>{
       return members.find(m=>m.username===d.username)?.profileImg
    })
-   const coord_leads_img=Coordinators_and_leads.map((d)=>{
+   const coord_leads_img=Coordinators_and_leads && Coordinators_and_leads.length>0 &&  Coordinators_and_leads.map((d)=>{
       return members.find(m=>m.username===d.username)?.profileImg
    })
 
-   const executives_img=Executives.map((d)=>{
+   const executives_img=Executives && Executives.length>0 && Executives.map((d)=>{
       return members.find(m=>m.username===d.username)?.profileImg
    })
    
