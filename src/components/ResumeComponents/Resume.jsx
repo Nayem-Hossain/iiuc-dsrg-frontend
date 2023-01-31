@@ -255,7 +255,7 @@ console.log(memberDetails.jobs);
                 { designation!=="" && <span>{designation},IIUC Data Science Research Group</span> }
                   </p>
                 </div>
-                <p style={{marginLeft:'80%',marginBottom:'10px'}} className='mail_to'><a  href={`mailto:${memberDetails.email}`}>Contact<i style={{paddingLeft:'2px',marginTop:'3px'}}  class="bi bi-envelope"></i></a></p>
+                <p style={{marginLeft:'75%',marginBottom:'10px'}} className='mail_to'><a  href={`mailto:${memberDetails.email}`}>Contact<i style={{paddingLeft:'2px',marginTop:'3px'}}  class="bi bi-envelope"></i></a></p>
               </div>
             </div>
             

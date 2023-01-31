@@ -17,7 +17,7 @@ const EventsAndNews = () => {
                     <div>
                         {Array.from({ length: 5 }).map((_, idx) => (
                             <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-once="true" className='mb-4 border-2 border-bottom border-dark-subtle'>
-                                <Row className="d-flex justify-content-between mb-4" style={{ height: "150px" }}>
+                                <Row className="d-flex justify-content-between mb-4">
                                     <Col>
                                         <Card.Body>
                                             <Card.Title className='fw-bold text-justify'>eSRD-Lab Team Visit to International Islamic University Chittagong for Collaboration</Card.Title>
