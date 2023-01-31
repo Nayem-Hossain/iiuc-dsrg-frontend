@@ -3997,7 +3997,6 @@ body {
 
 /* Contact-Form Style Sheet nayem */
 
-
 .contact-area {
   background: url() no-repeat;
   background-attachment: fixed;
@@ -4160,7 +4159,75 @@ body {
 .text-center {
   text-align: center !important;
 }
-.justify-text{
+.justify-text {
   text-align: justify;
   text-justify: inter-word;
+}
+
+/*----------------------------------
+ media query Chief And Vice Chief by nayem
+ ----------------------------------*/
+
+ .media-chief-vicechief {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media only screen and (max-width: 480px) {
+  .media-chief-vicechief {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/*----------------------------------
+ media query Cordinator And Team Leader by nayem
+ ----------------------------------*/
+
+.media-cordinator-lead {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media only screen and (max-width: 480px) {
+  .media-cordinator-lead {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .media-cordinator-lead {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .media-cordinator-lead {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/*----------------------------------
+ media query Executive Member by nayem
+ ----------------------------------*/
+
+.media-executive-member {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+@media only screen and (max-width: 480px) {
+  .media-executive-member {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .media-executive-member {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .media-executive-member {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (min-width: 920px) and (max-width: 1024px) {
+  .media-executive-member {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

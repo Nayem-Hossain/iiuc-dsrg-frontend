@@ -8,31 +8,31 @@ import axios from 'axios'
 import { useState } from 'react';
 import Loader from '../CommonComponents/Loader';
 const Commitee = () => {
-  const [committee,setCommittee]=useState([])
-  const [members,setMembers]=useState([])
-  const [selectedSession,setSelectedSession]=useState("2022-2023")
+   const [committee, setCommittee] = useState([])
+   const [members, setMembers] = useState([])
+   const [selectedSession, setSelectedSession] = useState("2022-2023")
 
-   useEffect(()=>{
-      try {
-         const getCommitteeMembers = async () => {
-           const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
-           const data=response.data.filter((d)=>d.session===selectedSession)
-           setCommittee(data)
-         }
-         getCommitteeMembers()
-       } catch (error) {
-         console.log(error)
-       }
-   },[])
    useEffect(() => {
       try {
-        const getMembers = async () => {
-          const response = await axios.get('https://gray-awful-newt.cyclic.app/api/members');
-          setMembers(response.data)
-        }
-        getMembers()
+         const getCommitteeMembers = async () => {
+            const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
+            const data = response.data.filter((d) => d.session === selectedSession)
+            setCommittee(data)
+         }
+         getCommitteeMembers()
       } catch (error) {
-        console.log(error)
+         console.log(error)
+      }
+   }, [])
+   useEffect(() => {
+      try {
+         const getMembers = async () => {
+            const response = await axios.get('https://gray-awful-newt.cyclic.app/api/members');
+            setMembers(response.data)
+         }
+         getMembers()
+      } catch (error) {
+         console.log(error)
       }
     }, [committee])
 
@@ -67,98 +67,98 @@ const Commitee = () => {
    const executives_img=Executives && Executives.length>0 && Executives.map((d)=>{
       return members.find(m=>m.username===d.username)?.profileImg
    })
-   
+
    console.log("img")
    console.log(vice_chief_img)
    console.log(coord_leads_img)
    console.log(executives_img)
    return (
-      
-         committee && committee.length>0 && members && members.length>0?
+
+      committee && committee.length > 0 && members && members.length > 0 ?
          <>
-         <h1 className='text-center fw-bold p-5'>Commitee Members</h1>
-         <Container>
+            <h1 className='text-center fw-bold p-5'>Commitee Members</h1>
+            <Container>
 
-            {/* chief and vice chief */}
+               {/* chief and vice chief */}
 
-            <>
-
-               <div className='border-2 border-bottom border-dark-subtle'>
-                  <div className='row justify-content-center'>
-                     <div className='commitee-member'>
-                        <img src={image_of_chief || ProfileImg} alt="" />
-                        <Link to={`/me/${chief.username}`}><h3>{chief.name}</h3></Link>
-                        <p>{chief.designation}</p>
+               <>
+                  <div className='border-2 border-bottom border-dark-subtle'>
+                     <div className='row justify-content-center'>
+                        <div className='commitee-member'>
+                           <img src={image_of_chief || ProfileImg} alt="" />
+                           <Link to={`/me/${chief.username}`}><h3>{chief.name}</h3></Link>
+                           <p>{chief.designation}</p>
+                        </div>
+                     </div>
+                     <div className='media-chief-vicechief'>
+                        {Vice_chiefs.map((vc, idx) => (
+                           <div>
+                              <div className='commitee-member'>
+                                 <img src={vice_chief_img[idx] || ProfileImg} alt="" />
+                                 <Link to={`/me/${vc.username}`}><h3>{vc.name}</h3></Link>
+                                 <p>{vc.designation}</p>
+                              </div>
+                           </div>
+                        ))}
                      </div>
                   </div>
-                  <div className='row'>
-                     {Vice_chiefs.map((vc, idx) => (
-                        <div className='col'>
+               </>
+
+               {/* Coordinator and Team Leaders  */}
+
+               <>
+                  <div className='title-div partners my-5'>
+                     <Separator />
+                     <div> <h3 className='text-center'>Coordinator & Team Leaders</h3></div>
+                     <Separator />
+                  </div>
+                  {/*Row xs={1} sm={3} md={4}  */}
+                  <div className='media-cordinator-lead border-2 border-bottom'>
+                     {Coordinators_and_leads.map((d, idx) => (
+                        <>
                            <div className='commitee-member'>
-                              <img src={vice_chief_img[idx]||ProfileImg} alt="" />
-                              <Link to={`/me/${vc.username}`}><h3>{vc.name}</h3></Link>
-                              <p>{vc.designation}</p>
+                              <img src={coord_leads_img[idx] || ProfileImg} alt="" />
+                              <Link to={`/me/${d.username}`}><h3>{d.name}</h3></Link>
+                              <p>{d.designation}</p>
                            </div>
-                        </div>
+                        </>
                      ))}
                   </div>
-               </div>
-            </>
+               </>
 
-            {/* Coordinator and Team Leaders  */}
-
-            <>
-               <div className='title-div partners my-5'>
-                  <Separator />
-                  <div> <h3 className='text-center'>Coordinator & Team Leaders</h3></div>
-                  <Separator />
+               {/* Executive Members */}
+               <>
+                  <div className='title-div partners my-5'>
+                     <Separator />
+                     <div> <h3 className='text-center'>Executive Members</h3></div>
+                     <Separator />
+                  </div>
+                  <div className='media-executive-member border-2 border-bottom'>
+                     {Executives.map((d, idx) => (
+                        <>
+                           <div className='commitee-member'>
+                              <img src={executives_img[idx] || ProfileImg} alt="" />
+                              <Link to={`/me/${d.username}`}><h3>{d.name}</h3></Link>
+                              <p>{d.designation}</p>
+                           </div>
+                        </>
+                     ))}
+                  </div>
+               </>
+               <div className='d-flex justify-content-center my-5'>
+                  <Pagination className='p-2'>
+                     <Pagination.First>{"First"}</Pagination.First >
+                     <Pagination.Prev />
+                     <Pagination.Item active>{`2022-2023`}</Pagination.Item>
+                     <Pagination.Item>{`2022-2023`}</Pagination.Item>
+                     <Pagination.Item>{`2022-2023`}</Pagination.Item>
+                     <Pagination.Ellipsis />
+                     <Pagination.Item disabled>{`2022-2023`}</Pagination.Item>
+                     <Pagination.Next />
+                     <Pagination.Last>{"Last"}</Pagination.Last >
+                  </Pagination>
                </div>
-               <Row xs={1} md={4} className='g-4 border-2 border-bottom border-dark-subtle'>
-                  {Coordinators_and_leads.map((d, idx) => (
-                     <Col>
-                        <div className='commitee-member'>
-                           <img src={coord_leads_img[idx]||ProfileImg} alt="" />
-                           <Link to={`/me/${d.username}`}><h3>{d.name}</h3></Link>
-                           <p>{d.designation}</p>
-                        </div>
-                     </Col>
-                  ))}
-               </Row>
-            </>
-
-            {/* Executive Members */}
-            <>
-               <div className='title-div partners my-5'>
-                  <Separator />
-                  <div> <h3 className='text-center'>Executive Members</h3></div>
-                  <Separator />
-               </div>
-               <Row xs={1} md={5} className='g-4 border-2 border-bottom border-dark-subtle'>
-                  {Executives.map((d, idx) => (
-                     <Col>
-                        <div className='commitee-member'>
-                           <img src={executives_img[idx]||ProfileImg} alt="" />
-                           <Link to={`/me/${d.username}`}><h3>{d.name}</h3></Link>
-                           <p>{d.designation}</p>
-                        </div>
-                     </Col>
-                  ))}
-               </Row>
-            </>
-            <div className='d-flex justify-content-center my-5'>
-               <Pagination className='p-2'>
-                  <Pagination.First>{"First"}</Pagination.First >
-                  <Pagination.Prev />
-                  <Pagination.Item active>{`2022-2023`}</Pagination.Item>
-                  <Pagination.Item>{`2022-2023`}</Pagination.Item>
-                  <Pagination.Item>{`2022-2023`}</Pagination.Item>
-                  <Pagination.Ellipsis />
-                  <Pagination.Item disabled>{`2022-2023`}</Pagination.Item>
-                  <Pagination.Next />
-                  <Pagination.Last>{"Last"}</Pagination.Last >
-               </Pagination>
-            </div>
-            {/* <div className='commitee-members'>
+               {/* <div className='commitee-members'>
         <div className='commitee-member'>
            <img src={ProfileImg} alt="" />
            <h3>Abid Ud Takey Emou</h3>
@@ -312,10 +312,10 @@ const Commitee = () => {
            <p>Executive Member</p>
         </div>
         </div> */}
-         </Container>
-      </>:<Loader/>
-      
-      
+            </Container>
+         </> : <Loader />
+
+
    )
 
 }
