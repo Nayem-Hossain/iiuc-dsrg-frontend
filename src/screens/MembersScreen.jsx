@@ -43,13 +43,14 @@ const MembersScreen = () => {
       {
         members && members.length > 0 ?
           <Container>
-            <Row xs={1} sm={2} md={5} className='g-4'>
+            {/* Row xs={1} sm={2} md={5} className='g-4' */}
+            <div  className='media-general-member'>
               {
                 curMembers.map((member) => {
                   return <Member member={member} />
                 })
               }
-            </Row>
+            </div>
             <div className='d-flex justify-content-center my-5'>
              {/* <PaginationComponent></PaginationComponent> */}
              {(members.length>0) && <PaginationComponent membersPerPage={membersPerPage} changePageNumber={changePageNumber}

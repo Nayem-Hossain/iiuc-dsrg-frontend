@@ -150,10 +150,7 @@ const Commitee = () => {
                      <Pagination.First>{"First"}</Pagination.First >
                      <Pagination.Prev />
                      <Pagination.Item active>{`2022-2023`}</Pagination.Item>
-                     <Pagination.Item>{`2022-2023`}</Pagination.Item>
-                     <Pagination.Item>{`2022-2023`}</Pagination.Item>
                      <Pagination.Ellipsis />
-                     <Pagination.Item disabled>{`2022-2023`}</Pagination.Item>
                      <Pagination.Next />
                      <Pagination.Last>{"Last"}</Pagination.Last >
                   </Pagination>

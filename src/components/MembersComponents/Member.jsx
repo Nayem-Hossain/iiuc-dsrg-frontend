@@ -11,7 +11,7 @@ const Member = ({ member }) => {
   const navigate = useNavigate()
   return (
     <>
-      <Col>
+      <div>
         <div className='member'>
           <div>
             <img src={member.profileImg || ProfileImg} alt={member.username} />
@@ -19,7 +19,7 @@ const Member = ({ member }) => {
           </div>
           <button onClick={() => navigate(`/me/${username}`)} className="btn btn-outline-dark border border-1 border-dark rounded-pill" style={{ margin: "5px 0px" }}>View Profile</button>
         </div>
-      </Col>
+      </div>
     </>
     // <Container className="member-container">
     //   <div className="member">

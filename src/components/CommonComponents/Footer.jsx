@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer-section">
     <div className="container">
-        <div className="footer-cta pt-3 pb-3">
+        {/* <div className="footer-cta pt-3 pb-3">
             <div className="row">
                 <div className="col-xl-4 col-md-4 mb-30">
                     <div className="single-cta">
@@ -36,8 +36,8 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-        </div>
-        <div className="footer-content pt-3 pb-3">
+        </div> */}
+        <div className="footer-content pt-5 pb-3">
             <div className="row">
                 <div className="col-xl-4 col-lg-4 mb-50">
                     <div className="footer-widget">
@@ -52,9 +52,9 @@ const Footer = () => {
                         </div>
                         <div className="footer-social-icon">
                             <span>Follow us</span>
-                            <a href="#"><FontAwesomeIcon className="fab fa-facebook-f facebook-bg" icon={faFacebook} /></a>
+                            <a href="https://www.facebook.com/idsrg/"><FontAwesomeIcon className="fab fa-facebook-f facebook-bg" icon={faFacebook} /></a>
                             <a href="#"><FontAwesomeIcon className="fab fa-twitter twitter-bg" icon={faTwitter} /></a>
-                            <a href="#"><FontAwesomeIcon className="fab fa-google-plus-g google-bg" icon={faLinkedin} /></a>
+                            <a href="https://www.linkedin.com/company/idsrg/"><FontAwesomeIcon className="fab fa-google-plus-g google-bg" icon={faLinkedin} /></a>
                         </div>
                     </div>
                 </div>

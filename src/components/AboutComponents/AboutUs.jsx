@@ -13,8 +13,8 @@ const AboutUs = () => {
       </div>
 
       <Container>
-        <div className='d-flex justify-content-between'>
-          <div className='text-center py-5 pe-5'>
+        <div className='frequently-asked-questions'>
+          <div className=''>
             <img src={IDSRG} alt="idsrg logo" style={{borderRadius:"30px"}}/>
           </div>
           <div className='w-100'>

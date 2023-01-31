@@ -4168,7 +4168,7 @@ body {
  media query Chief And Vice Chief by nayem
  ----------------------------------*/
 
- .media-chief-vicechief {
+.media-chief-vicechief {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -4202,7 +4202,6 @@ body {
   }
 }
 
-
 /*----------------------------------
  media query Executive Member by nayem
  ----------------------------------*/
@@ -4231,3 +4230,127 @@ body {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/*----------------------------------
+ media query General Member by nayem
+ ----------------------------------*/
+
+.media-general-member {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+@media only screen and (max-width: 480px) {
+  .media-general-member {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .media-general-member {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .media-general-member {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (min-width: 920px) and (max-width: 1024px) {
+  .media-general-member {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*----------------------------------
+ media query News and Events by nayem
+ ----------------------------------*/
+ .news-information {
+  padding: 0 2rem 0 0;
+}
+ .news-heading {
+  font-weight: 900;
+}
+.media-news-and-events {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+.media-news-and-events img{
+  object-fit: cover;
+}
+@media only screen and (max-width: 480px) {
+  .news-information{
+    padding: 0px;
+  }
+  .news-heading {
+    font-size: 15px;
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .news-information{
+    padding: 0px;
+  }
+  .news-heading {
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .news-information {
+    padding: 15px;
+  }
+  .news-heading {
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+  }
+  
+}
+
+@media only screen and (min-width: 920px) and (max-width: 1024px) {
+  .news-information {
+    padding: 15px;
+  }
+  .news-heading {
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+  }
+  
+}
+
+/*
+----------------------------------------
+ about us responsive design by nayem
+ ---------------------------------------- 
+*/
+.frequently-asked-questions{
+  display: flex;
+  justify-content: space-between;
+  gap: 5em;
+}
+@media only screen and (max-width: 480px) {
+  .frequently-asked-questions{
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .frequently-asked-questions{
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .frequently-asked-questions{
+    flex-direction: column;
+  }
+}
+
