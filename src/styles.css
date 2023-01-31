@@ -636,6 +636,11 @@ color: white!important;
 
 
 /*Media Queries*/
+@media(max-width:1000px){
+  .ques{
+    flex-direction: column;
+  }
+}
 @media(max-width:992px)
 {
 .counterWidget {

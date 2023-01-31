@@ -7,7 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Member = ({ member }) => {
   const { _id, username } = member
-  console.log(member)
+
   const navigate = useNavigate()
   return (
     <>

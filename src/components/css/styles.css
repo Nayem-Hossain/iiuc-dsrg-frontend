@@ -1118,7 +1118,7 @@ a {
 /* ----------------left box profil page------- */
 .profil_page {
   display: flex;
-  width: 75%;
+ /* width: 75%;*/
   margin: 2rem auto;
 }
 .left_box {
@@ -3821,14 +3821,14 @@ body {
 /* ====== medias profile page========    */
 
 @media screen and (max-width: 1250px) {
-  .profil_page {
-    width: 85%;
-  }
+ /* .profil_page {
+    width: 85%; 
+  }*/
 }
 @media screen and (max-width: 1150px) {
-  .profil_page {
+ /* .profil_page {
     width: 90%;
-  }
+  } */
 }
 @media screen and (max-width: 1000px) {
   .toggle_head {
@@ -3847,16 +3847,14 @@ body {
     position: relative;
     top: -0.3rem;
   }
-  .left_box {
-    width: 60%;
-  }
+  
   #right_box {
     display: block;
     width: 37%;
   }
-  .profil_page {
+ /* .profil_page {
     width: 75%;
-  }
+  } */
   .stat_boxes {
     flex-direction: column;
   }
@@ -3903,9 +3901,9 @@ body {
   .toggle_head {
     width: 90%;
   }
-  .profil_page {
+  /*.profil_page {
     width: 90%;
-  }
+  }*/
 
   select {
     width: 100%;
@@ -3913,9 +3911,9 @@ body {
   }
 }
 @media screen and (max-width: 800px) {
-  .profil_page {
+  /*.profil_page {
     width: 94%;
-  }
+  } */
   dl,
   ol,
   ul {
@@ -3928,9 +3926,9 @@ body {
     display: none;
   }
 
-  .profil_page {
+  /*.profil_page {
     width: 80%;
-  }
+  }*/
   #right_box {
     display: none;
   }
@@ -3939,9 +3937,9 @@ body {
   }
 }
 @media screen and (max-width: 700px) {
-  .profil_page {
+  /*.profil_page {
     width: 93%;
-  }
+  } */
   .footer_profil {
     width: 95%;
     margin: 0 auto;
@@ -3950,9 +3948,9 @@ body {
   }
 }
 @media screen and (max-width: 650px) {
-  .profil_page {
+ /* .profil_page {
     width: 100%;
-  }
+  } */
   .responsive_footer_box {
     width: 50%;
   }

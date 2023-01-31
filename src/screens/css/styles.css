@@ -3847,9 +3847,9 @@ body {
     position: relative;
     top: -0.3rem;
   }
-  .left_box {
+  /*.left_box {
     width: 60%;
-  }
+  }*/
   #right_box {
     display: block;
     width: 37%;

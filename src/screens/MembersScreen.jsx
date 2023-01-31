@@ -31,7 +31,6 @@ const MembersScreen = () => {
     const indexOfLastMember=currentPage*membersPerPage
     const indexOfFirstMember=indexOfLastMember-membersPerPage
     const curMembers=members.slice(indexOfFirstMember,indexOfLastMember)
-    console.log(curMembers)
     const changePageNumber=(num)=>{
         setCurrentPage(num);
     }
@@ -43,7 +42,6 @@ const MembersScreen = () => {
       {
         members && members.length > 0 ?
           <Container>
-            {/* Row xs={1} sm={2} md={5} className='g-4' */}
             <div  className='media-general-member'>
               {
                 curMembers.map((member) => {

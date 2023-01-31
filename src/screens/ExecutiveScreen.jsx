@@ -7,7 +7,6 @@ import Commitee from '../components/ExecutiveComponents/Commitee'
 import WithLayout from '../Layout/WithLayout'
 const ExecutiveScreen = () => {
   const path=useLocation().pathname
-  console.log(path)
   return (
   <>
 

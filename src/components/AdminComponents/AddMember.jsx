@@ -28,14 +28,14 @@ const AddMember = () => {
                 }
             }
             const { data } = await axios.post('https://gray-awful-newt.cyclic.app/api/members', memberInfo, config)
-            console.log(data);
+
             if (data.success) {
                 setErrorMessage('')
                 setSuccessMessage('Member added successfully')
             }
         }
         catch (error) {
-            console.log(error.response);
+            
             setSuccessMessage('')
             setErrorMessage(error.response.data.message);
         }

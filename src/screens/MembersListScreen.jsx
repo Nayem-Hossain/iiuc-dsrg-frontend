@@ -33,7 +33,7 @@ const MembersListScreen = () => {
                 }
             }
             const {data}=await axios.get(`https://gray-awful-newt.cyclic.app/api/deleteMember/${memberId}`,config)
-            console.log(data)
+           
             const remainingMembers=members.filter((m,index)=>m._id!==data._id)
             setMembers([...remainingMembers])
             
