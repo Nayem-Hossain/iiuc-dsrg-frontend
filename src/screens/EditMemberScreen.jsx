@@ -68,7 +68,6 @@ const EditMemberScreen = () => {
 
         const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
 
-        console.log(memberInfo)
         try {
             const config = {
                 headers:{
@@ -86,7 +85,7 @@ const EditMemberScreen = () => {
      formData.append("description",memberInfo.description)
      
             const { data } = await axios.put(`https://gray-awful-newt.cyclic.app/api/editMember/${params.id}`, formData, config)
-            console.log(data);
+           
             if (data.success) {
                 setErrorMessage('')
                 setSuccessMessage('Member updated successfully')

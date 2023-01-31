@@ -12,11 +12,8 @@ import BackgroundImg from '../assets/BackgroundImg.jpeg'
 import '../css/styles.css'
 
 const Resume = ({member}) => {
-  console.log("mem")
-    console.log(member)
-console.log("testContext")
 const userData = useAppContext();
-console.log(userData)
+
     const [memberDetails,setMemberDetails]=useState(member)
     const navigate=useNavigate()
   const userInfo=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
@@ -41,8 +38,6 @@ useEffect(()=>{
      const getCommitteeMembers = async () => {
        const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
        const isExecutive=response.data.find((d)=>d.username===member.username)
-       console.log("isEx")
-       console.log(isExecutive)
        if(isExecutive)
        setDesignation(isExecutive.designation);
        else setDesignation('Member')
@@ -58,8 +53,7 @@ const handleSubmit = async (e) => {
     const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
 
     e.preventDefault()
-    console.log("member info")
-     console.log(memberInfo)
+  
     try {
         const config = {
             headers: {
@@ -68,8 +62,7 @@ const handleSubmit = async (e) => {
             }
         }
         const { data } = await axios.put(`https://gray-awful-newt.cyclic.app/api/jobs/${member._id}`, memberInfo, config)
-        console.log("updated")
-        console.log(data);
+       
         setMemberDetails(data.member)
         if (data.success) {
             setErrorMessage('')
@@ -90,8 +83,6 @@ const handleChange = (e) => {
     const value = e.target.value;
     setMemberInfo({ ...memberInfo, [key]: value })
 }
-console.log("ok")
-console.log(memberDetails)
 
 
 memberDetails.jobs.sort(function(a, b) {
@@ -100,7 +91,7 @@ memberDetails.jobs.sort(function(a, b) {
   return dateB - dateA;
 });
 
-console.log(memberDetails.jobs);
+
 
   return (
    <>
@@ -148,92 +139,7 @@ console.log(memberDetails.jobs);
         </Modal.Body>
         
       </Modal>
-   {/* <div  className="profile-page">
-  <div  className="wrapper">
-    <div  className="page-header page-header-small">
-      <div  className="page-header-image" ></div>
-      <div  className="container">
-        <div  className="content-center">
-          <div  className="cc-profile-image"><a href="#"><img src={memberDetails.profileImg||ProfileImg} alt="Image"/></a></div>
-          </div>
-      </div>
-      <div  className="section">
-        <div  className="container">
-        <p style={{padding:"10px 0px",fontWeight:'bold'}}>Field of Interest:{memberDetails.field_of_interest}</p>
-       </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div  className="section" id="about" style={{marginBottom:"20px"}}>
-  <div  className="container">
-    <div  className="card" data-aos="fade-up" data-aos-offset="10">
-      <div  className="row">
-        <div  className="col-lg-6 col-md-12">
-          <div  className="card-body">
-            <div  className="h4 mt-0 title">About</div>
-      <p>{memberDetails.description}</p>
-          </div>
-        </div>
-        <div  className="col-lg-6 col-md-12">
-          <div  className="card-body">
-            <div  className="h4 mt-0 title">Basic Information</div>
-            <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Email:</strong></div>
-              <div  className="col-sm-8">{memberDetails.email}</div>
-            </div>
-            <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Phone:</strong></div>
-              <div  className="col-sm-8">{memberDetails.phone}</div>
-            </div>
-         
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div  className="section" id="experience" style={{marginBottom:"20px"}}>
-  <div  className="container cc-experience">
-  {
-  userData.userInfo.user && (
-    <div className='add-experiance'>
-      <p>Add experience</p>
-      <p><FontAwesomeIcon onClick={handleShow} icon={faPlus}/></p>
-      </div>
-  )
-  }
-    <div  className="h4 text-center mb-4 title">{memberDetails.jobs.length>0 && "Work Experience"}</div>
-    {
-      memberDetails.jobs && memberDetails.jobs.length>0 &&
-      memberDetails.jobs.map(job=>{
-          console.log(job)
-          return (
-            (
-              <div  className="card">
-            <div  className="row">
-              <div  className="col-md-3 job bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                <div  className="card-body cc-experience-header">
-                  <p>{job.startDate} - {job.endDate}</p>
-                  <div  className="h5">{job.company}</div>
-                </div>
-              </div>
-              <div  className="col-md-9 "  data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                <div  className="card-body">
-                  <div  className="h5">{job.designation}</div>
-                  <p>{job.jobDescription}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-            )
-          )
-        })
-    }
-
-  </div>
-</div>
-*/}
+ 
 <main className="profil_page">
           <section className="left_box">
             <div className="profil_info" id="pro_info">
@@ -279,25 +185,12 @@ console.log(memberDetails.jobs);
               {
       memberDetails.jobs && memberDetails.jobs.length>0 && 
       memberDetails.jobs.map(job=>{
-          console.log(job)
+          
           return (
             (
               <>
                  <p style={{marginBottom:'20px'}}><img src="https://i.f1g.fr/media/eidos/orig/2015/07/20/PHO81b3db84-2ec8-11e5-ad32-1d334e2eca66-805x453.jpg" alt="" />  &nbsp; <span>{job.designation}</span>  <br /> &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;{job.company}<br /> &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;[{job.startDate}] - [{job.endDate}]<br /></p>
-           {/* <div  className="row">
-              <div  className="col-md-3 job bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                <div  className="card-body cc-experience-header">
-                  <p>{job.startDate} - {job.endDate}</p>
-                  <div  className="h5">{job.company}</div>
-                </div>
-              </div>
-              <div  className="col-md-9 "  data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                <div  className="card-body">
-                  <div  className="h5">{job.designation}</div>
-                  <p>{job.jobDescription}</p>
-                </div>
-              </div>
-            </div> */}
+           
         </>
             )
           )
@@ -342,14 +235,9 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
                   </span>
                 </span>
               </div>
-            {/*  <h5 className="tech_language">JavaScript</h5>
-              <h5 className="tech_language">css</h5>
-<h5>Bootstrap</h5> */}
+          
             </div>
-          {/*  <div className="show_more_res more_skill">
-              <p className="click_more">Show all 32 skills <i className="fa-solid fa-right-long" /></p>
-            </div>
-        */}
+          
             <div className="languages">
               <div className="title">
                 <h4>Languages</h4>
@@ -359,23 +247,12 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
                 <h5>Bangla</h5>
                 <p>Native</p>
               </div>
-             {/* <div className="language">
-                <h5>English</h5>
-                <p>Fluent</p>
-      </div> */}
+            
             </div>
             <div className="infos" style={{paddingBottom:'10px'}}>
           <div  className="card-body">
             <div  className="h4 mt-0 title">Basic Information</div>
-           {/*   <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Email:</strong></div>
-              <div  className="col-sm-8">{memberDetails.email}</div>
-    </div> */}
-         {/*   <div  className="row mt-3">
-              <div  className="col-sm-4"><strong  className="text-uppercase">Phone:</strong></div>
-              <div  className="col-sm-8">{memberDetails.phone}</div>
-              
-    </div> */}
+          
             <div  className="row mt-3">
               <div  className="col-sm-4"><strong  className="text-uppercase">Field of Interest:</strong></div>
               <div  className="col-sm-8">{memberDetails.field_of_interest}</div>

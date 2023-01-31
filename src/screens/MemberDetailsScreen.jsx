@@ -12,7 +12,7 @@ const MemberDetailsScreen = () => {
   const [member, setMember] = useState()
   const params = useParams()
   const [errorMessage, setErrorMessage] = useState("")
-  //console.log(params.id)
+
 
   useEffect(() => {
     try {
@@ -22,7 +22,7 @@ const MemberDetailsScreen = () => {
 
           setMember(response.data)
         } catch (error) {
-          console.log("status")
+        
           setErrorMessage(error.response.data)
         }
       }
