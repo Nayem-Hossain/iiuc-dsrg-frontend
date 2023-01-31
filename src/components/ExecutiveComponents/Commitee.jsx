@@ -9,21 +9,48 @@ import { useState } from 'react';
 import Loader from '../CommonComponents/Loader';
 const Commitee = () => {
    const [committee, setCommittee] = useState([])
+   const [data,setData]=useState([])
    const [members, setMembers] = useState([])
-   const [selectedSession, setSelectedSession] = useState("2022-2023")
-
+   const [selectedSession, setSelectedSession] = useState("")
+   const [sortedSessions,setSortedSessions]=useState([])
+   let sessions=[]
    useEffect(() => {
       try {
          const getCommitteeMembers = async () => {
             const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
-            const data = response.data.filter((d) => d.session === selectedSession)
-            setCommittee(data)
+            setData(response.data)
+            response.data.forEach(m => {
+               if (!sessions.includes(m.session)) {
+                  sessions.push(m.session);
+               }
+             });
+             console.log("sessions")
+             console.log(sessions); 
+             function sortDates(dates) {
+               return dates.sort((a, b) => {
+                 const lastYearA = parseInt(a.split('-')[1]);
+                 const lastYearB = parseInt(b.split('-')[1]);
+                 return lastYearB - lastYearA;
+               });
+             }
+              const sortedDates = sortDates(sessions);
+             console.log('sortedDates');
+             console.log(sortedDates); 
+             setSortedSessions(sortedDates)
+             setSelectedSession(sortedDates[0])
+            //const data = response.data.filter((d) => d.session === sortedDates[0])
+            //setCommittee(data)
+            
          }
          getCommitteeMembers()
       } catch (error) {
          console.log(error)
       }
    }, [])
+   
+
+  
+
    useEffect(() => {
       try {
          const getMembers = async () => {
@@ -31,10 +58,18 @@ const Commitee = () => {
             setMembers(response.data)
          }
          getMembers()
+
       } catch (error) {
          console.log(error)
       }
     }, [committee])
+
+
+
+    useEffect(()=>{
+      const getCommittee = data.filter((d) => d.session === selectedSession)
+      setCommittee(getCommittee) 
+    },[selectedSession])
 
    const chief=committee && committee.length>0 &&
    committee.find((m)=>m.designation.toLowerCase()==='chief' && m.section==='chief_and_vice-chief')
@@ -61,6 +96,11 @@ const Commitee = () => {
    const executives_img=Executives && Executives.length>0 && Executives.map((d)=>{
       return members.find(m=>m.username===d.username)?.profileImg
    })
+   
+
+   const handleClick=(ses)=>{
+      setSelectedSession(ses)
+   }
 
    
    return (
@@ -136,7 +176,7 @@ const Commitee = () => {
                      ))}
                   </div>
                </>
-               <div className='d-flex justify-content-center my-5'>
+            {/*   <div className='d-flex justify-content-center my-5'>
                   <Pagination className='p-2'>
                      <Pagination.First>{"First"}</Pagination.First >
                      <Pagination.Prev />
@@ -149,7 +189,20 @@ const Commitee = () => {
                      <Pagination.Last>{"Last"}</Pagination.Last >
                   </Pagination>
                </div>
-               
+                     */}
+                    <div style={{display:'flex',
+                    justifyContent:'center',
+                    margin:'10px 0px'}}>
+                    {
+                        sortedSessions.map(ses=>{
+                           return <p style={{backgroundColor:'#DC2516',
+                           padding:'10px',
+                           border:'1px solid #000000',
+                        color:'#ffffff'}}
+                           onClick={()=>handleClick(ses)}>{ses}</p>
+                        })
+                     }
+                    </div>
             </Container>
          </> : <Loader />
 
