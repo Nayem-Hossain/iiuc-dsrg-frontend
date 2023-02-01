@@ -144,8 +144,7 @@ memberDetails.jobs.sort(function(a, b) {
           <section className="left_box">
             <div className="profil_info" id="pro_info">
               <div className="backgound_and_profil">
-                <i className="fa-solid fa-pencil" />
-                <img className="background_img" src={BackgroundImg} alt="#" />
+                <img className="background_img" src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1675235929/dsrgcv_gtmmoc.jpg" alt="#" />
                 <img className="profil_pic" src={memberDetails.profileImg||ProfileImg} alt="#" />
               </div>
               <div className="personnal_info_profil">
