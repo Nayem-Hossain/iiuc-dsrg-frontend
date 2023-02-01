@@ -15,10 +15,7 @@ const Footer = () => {
                            alt="logo"
                             /></a>
                         </div>
-                        <div className="footer-text">
-                            <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
-                            elit,Lorem ipsum dolor sit amet.</p>
-                        </div>
+                        
                         <div className="footer-social-icon">
                             <span>Follow us</span>
                             <a href="https://www.facebook.com/idsrg/"><FontAwesomeIcon className="fab fa-facebook-f facebook-bg" icon={faFacebook} /></a>
