@@ -685,6 +685,15 @@ color: white!important;
   .memberListContainer  thead{
     display: none;
   }
+
+  .single-event{
+    display: flex!important;
+    flex-direction: column-reverse!important;
+    row-gap: 10px;
+  }
+  .event-img{
+   width: 100%!important;
+  }
 }
 @media(max-width:576px)
 {

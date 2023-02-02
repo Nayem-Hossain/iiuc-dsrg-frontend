@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Separator from '../CommonComponents/Separator';
 import EventsImg from '../assets/EsrdLab_Events.jpg';
-
+import axios from 'axios';
+import Loader from '../CommonComponents/Loader';
+import { Link } from 'react-router-dom';
 const CurrentEvents = () => {
+    const [events,setEvents]=useState([])
+    const [loading,setLoading]=useState(false)
+    useEffect(()=>{
+       const getEvents=async()=>{
+        setLoading(true)
+        const response = await axios.get('https://gray-awful-newt.cyclic.app/api/events');
+        setEvents(response.data)
+        setLoading(false)
+       }
+       getEvents()
+    },[])
+
+    events.sort(function(a, b) {
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        return dateB - dateA;
+      });
+      console.log(events)
     return (
         <Container className="my-5">
             <div className='title-div partners mb-5'>
@@ -14,25 +34,34 @@ const CurrentEvents = () => {
                 <div> <h3 className='text-center'>Our Current Events</h3></div>
                 <Separator />
             </div>
-            <Row xs={1} md={3} className="g-4">
-                {Array.from({ length: 6 }).map((_, idx) => (
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src={EventsImg} />
-                            <Card.Body>
-                                <Card.Title className='fw-bold text-justify'>eSRD-Lab Team Visit to International Islamic University Chittagong for Collaboration</Card.Title>
-                                <Card.Text style={{textAlign:"justify"}}>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit
-                                    longer.
-                                </Card.Text>
-                                <small className="text-muted">22nd of October 2022</small>
-                                
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
+            <Row xs={1} md={2} lg={2} xl={3} className="g-4">
+               {
+                loading?
+                <Loader/>:
+                events&& events.length>0 &&
+                    events.slice(0, 3).map((ev, idx) => (
+                        <Col>
+                            <Card>
+                                <Card.Img variant="top"
+                                style={{height:'235px'}} src={ev.image} />
+                                <Card.Body>
+                                    <Card.Title className='fw-bold text-justify'>{ev.title}</Card.Title>
+                                    <Card.Text style={{textAlign:"justify"}}>
+                                        {ev.description.split(" ").splice(0,50).join(" ")+
+                                        `.....`}
+                                        <Link to={`/events/${ev._id}`}>Read more</Link>
+                                    </Card.Text>
+                                    <small className="text-muted">{ev.date}</small>
+                                    
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))
+               }
             </Row>
+            <p style={{textAlign:'center'}}>
+                <Link to="/events-news">See more...</Link>
+            </p>
         </Container>
     );
 };
