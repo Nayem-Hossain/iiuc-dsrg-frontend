@@ -14,7 +14,7 @@ const LoginScreen = () => {
 
     const userData = useAppContext()
 
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
@@ -33,7 +33,7 @@ const LoginScreen = () => {
                     'Content-Type': 'application/json'
                 }
             }
-            const { data } = await axios.post('https://gray-awful-newt.cyclic.app/login', { email, password }, config)
+            const { data } = await axios.post('https://gray-awful-newt.cyclic.app/login', { username, password }, config)
             localStorage.setItem('userInfo', JSON.stringify(data))
             userData.userInfo.setUser(data)
             navigate('/admin')
@@ -119,8 +119,8 @@ const LoginScreen = () => {
                     }
                     <Form onSubmit={(e) => handleSubmit(e)} >
                         <Form.Group className="mb-4" controlId="adminEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control className="p-2" type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter email" />
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control className="p-2" type='text' onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Enter Username" />
                         </Form.Group>
 
                         <Form.Group className="mb-4" controlId="adminPassword">
