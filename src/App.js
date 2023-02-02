@@ -41,7 +41,7 @@ function App() {
       <Route path="/me/:username"  element={<MemberDetailsScreen />} />
       <Route path="/admin"  element={<AdminScreen />} />
       <Route path="/add-event"  element={< AddEventScreen/>} />
-      <Route path="/events/:id"  element={< EventDetailsScreen/>} />
+      <Route path="/events/:eid"  element={< EventDetailsScreen/>} />
       <Route path="/editMember/:id"  element={<EditMemberScreen />} />
       <Route path="/login"  element={<LoginScreen />} />
       <Route path="/membersList"  element={<MembersListScreen />} />

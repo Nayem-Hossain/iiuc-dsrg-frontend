@@ -9,6 +9,11 @@ import { Link } from 'react-router-dom';
 const EventsAndNews = () => {
     const [events,setEvents]=useState([])
     const [loading,setLoading]=useState(false)
+
+    
+  const [currentPage,setCurrentPage]=useState(1)
+  const [eventsPerPage]=useState(4)
+
     useEffect(()=>{
        const getEvents=async()=>{
         setLoading(true)
@@ -18,6 +23,8 @@ const EventsAndNews = () => {
        }
        getEvents()
     },[])
+
+
 
     const times=[];
    /* events.sort(function(a, b) {
@@ -77,6 +84,16 @@ if (elapsedMinutes < 60) {
           const timeAgo = getTimeAgo(postTime);
           times.push(timeAgo)
       })
+      
+      const reversed=events.slice(0).reverse().map(e=>e)
+
+      const indexOfLastEvent=currentPage*eventsPerPage
+      const indexOfFirstEvent=indexOfLastEvent-eventsPerPage
+      const curEvents=reversed.slice(indexOfFirstEvent,indexOfLastEvent)
+      const changePageNumber=(num)=>{
+          setCurrentPage(num);
+      }
+  
     return (
         <>
             <Container className="d-flex justify-content-center">
@@ -89,7 +106,8 @@ if (elapsedMinutes < 60) {
                     <div>
                         {
                             loading?<Loader/>:
-                            events.slice(0).reverse().map((ev, idx) => (
+                            events && events.length > 0 &&
+                            curEvents.map((ev, idx) => (
                                 <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-once="true" className='mb-4 border-2 border-bottom border-dark-subtle'>
                                     <Row className="d-flex justify-content-between mb-4 single-event">
                                         <Col>
@@ -100,7 +118,8 @@ if (elapsedMinutes < 60) {
                                         `.....`}
                                         <Link to={`/events/${ev._id}`}>Read more</Link>
                                                 </Card.Text>
-                                                <small className="text-muted">{ev.date} : updated {times[idx]}</small>
+                                                <small className="text-muted">{ev.date?.substring(0, 10)}<span 
+                                                style={{marginLeft:"10px"}}>updated {times[idx]}</span></small>
                                             </Card.Body>
                                         </Col>
                                         <Col className="col-3 event-img">
@@ -112,9 +131,14 @@ if (elapsedMinutes < 60) {
                         }
                     </div>
                 </div>
+                
             </Container>
             <Container className='d-flex justify-content-center mb-5'>
-                <PaginationComponent />
+            <div className='d-flex justify-content-center my-5'>
+             {/* <PaginationComponent></PaginationComponent> */}
+             {(events.length>0) && <PaginationComponent membersPerPage={eventsPerPage} changePageNumber={changePageNumber}
+              totalMembers={events.length} currentPage={currentPage}/>}
+            </div>
             </Container>
         </>
 

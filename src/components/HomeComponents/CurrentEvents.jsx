@@ -51,7 +51,7 @@ const CurrentEvents = () => {
                                         `.....`}
                                         <Link to={`/events/${ev._id}`}>Read more</Link>
                                     </Card.Text>
-                                    <small className="text-muted">{ev.date}</small>
+                                    <small className="text-muted">{ev.date?.substring(0, 10)}</small>
                                     
                                 </Card.Body>
                             </Card>

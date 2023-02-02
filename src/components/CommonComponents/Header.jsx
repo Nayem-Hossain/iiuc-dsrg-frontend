@@ -37,7 +37,7 @@ const Header = () => {
 
             <NavDropdown
               className={`${(currentLocation !== "/about" && currentLocation !== "/publication"
-                && currentLocation !== "/" && currentLocation !== "/events-news" && currentLocation !== "/blogs") ?
+                && currentLocation !== "/" && currentLocation !== "/events-news" && currentLocation !== "/blogs" && !params.eid) ?
                 "activeNavLink" : ""}`} title="Team" id="navbarScrollingDropdown">
               <NavDropdown.Item className={`${currentLocation === "/founder-and-head" ? "activeNavLink" : ""}`} as={Link} to="/founder-and-head">Founder and Head</NavDropdown.Item>
               <NavDropdown.Item className={`${currentLocation === "/advisory-panel" ? "activeNavLink" : ""}`} as={Link} to="/advisory-panel">Advisory Panel</NavDropdown.Item>
@@ -47,7 +47,7 @@ const Header = () => {
             </NavDropdown>
 
             <Nav.Link as={Link}
-              className={`${currentLocation === "/events-news" ? "activeNavLink" : ""}`}
+              className={`${(currentLocation === "/events-news"||params.eid) ? "activeNavLink" : ""}`}
               to="/events-news">
               Events/News
             </Nav.Link>

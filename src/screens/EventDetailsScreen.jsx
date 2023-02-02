@@ -5,7 +5,7 @@ import Loader from '../components/CommonComponents/Loader'
 import axios from 'axios'
 import { Container } from 'react-bootstrap'
 const EventDetailsScreen = () => {
-    const [eventDetails, setEventDetails] = useState("")
+    const [eventDetails, setEventDetails] = useState({})
   const params = useParams()
   const [errorMessage, setErrorMessage] = useState("")
   const [loading,setLoading]=useState(false)
@@ -15,7 +15,7 @@ const EventDetailsScreen = () => {
       const getEventById = async () => {
         try {
             setLoading(true)
-          const response = await axios.get(`https://gray-awful-newt.cyclic.app/api/events/${params.id}`);
+          const response = await axios.get(`https://gray-awful-newt.cyclic.app/api/events/${params.eid}`);
 
           setEventDetails(response.data)
           setLoading(false)
@@ -30,7 +30,7 @@ const EventDetailsScreen = () => {
       console.log(error)
       setErrorMessage(error.response.data)
     }
-  }, [params.id])
+  }, [params.eid])
   return (
     <Container className="d-flex justify-content-center">
    {
@@ -44,12 +44,14 @@ const EventDetailsScreen = () => {
             maxWidth:'600px',
         }}>
         <img src={eventDetails.image} />
+        <span style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Posted on:{eventDetails.date?.substring(0, 10)}</span>
         </div>
-            <h3 
+           <h3 
             style={{
                 margin:'20px 0px'
             }}
-            text-align="center">{eventDetails.title}</h3>     
+            text-align="center">
+            {eventDetails.title}</h3>     
            
         <p>{eventDetails.description}</p>
  
