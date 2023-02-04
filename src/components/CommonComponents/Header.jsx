@@ -5,11 +5,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, Navigate } from 'react-router-dom';
 import Logo from '../assets/logo.jpg'
 import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAppContext } from '../Context/userContext';
 const Header = () => {
   const params = useParams()
+  const navigate=useNavigate()
   const userData = useAppContext()
   // let userInfo=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
   const currentLocation = useLocation().pathname;
@@ -18,6 +19,7 @@ const Header = () => {
     localStorage.removeItem('userInfo');
     setUserInfo(null)
     userData.userInfo.setUser(null)
+    navigate('/login')
   }
 
   return (
@@ -91,7 +93,7 @@ const Header = () => {
                 <>
                  <NavDropdown
                     title={`${userInfo.username}`} id="navbarScrollingDropdown">
-                    <NavDropdown.Item as={Link} to="/user-profile">Profile</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/my-profile">Profile</NavDropdown.Item>
                      <NavDropdown.Item >
                       <p onClick={handleLogOut}>Logout</p>
 

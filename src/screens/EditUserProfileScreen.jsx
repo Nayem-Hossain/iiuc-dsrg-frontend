@@ -1,24 +1,24 @@
 import React,{useEffect, useState} from 'react'
-import ProfileImg from '../assets/profileImg.jpg'
+import ProfileImg from '../components/assets/profileImg.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import { useAppContext } from '../Context/userContext';
-import BrandImg from '../assets/organizationImg.jpg'
-import BackgroundImg from '../assets/BackgroundImg.jpeg'
-import '../css/styles.css'
+import { useAppContext } from '../components/Context/userContext';
+import '../components/css/styles.css'
+import WithLayout from '../Layout/WithLayout';
+import Loader from '../components/CommonComponents/Loader';
 
-const Resume = ({member}) => {
+const EditUserProfileScreen = () => {
 const userData = useAppContext();
-
-    const [memberDetails,setMemberDetails]=useState(member)
+const member=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
+    const [memberDetails,setMemberDetails]=useState({})
     const navigate=useNavigate()
   const userInfo=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
   const [show, setShow] = useState(false);
-
+  const [loading,setLoading]=useState(false)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -33,51 +33,52 @@ const userData = useAppContext();
 const [errorMessage, setErrorMessage] = useState('')
 const [successMessage, setSuccessMessage] = useState('')
 const [designation,setDesignation]=useState('')
+
 useEffect(()=>{
+
+    try {
+
+        const getMemberById = async () => {
+          try {
+            setLoading(true)
+            const response = await axios.get(`https://gray-awful-newt.cyclic.app/api/members/${member.username}`);
+  
+            setMemberDetails(response.data)
+            setLoading(false)
+          } catch (error) {
+          
+            setErrorMessage(error.response.data)
+            setLoading(true)
+          }
+        }
+        getMemberById()
+      } catch (error) {
+        console.log(error)
+        setErrorMessage(error.response.data)
+        setLoading(true)
+      }
+},[])
+useEffect(()=>{
+    console.log(member)
   try {
+ 
      const getCommitteeMembers = async () => {
        const response = await axios.get('https://gray-awful-newt.cyclic.app/api/committee');
+       console.log(response.data)
        const isExecutive=response.data.find((d)=>d.username===member.username)
        if(isExecutive)
        setDesignation(isExecutive.designation);
        else setDesignation('Member')
+      
      }
      getCommitteeMembers()
    } catch (error) {
      console.log(error)
+    
    }
-},[member])
+},[memberDetails])
 
-/*const handleSubmit = async (e) => {
-
-    const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
-
-    e.preventDefault()
-  
-    try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                 Authorization:`Bearer ${user.token}`
-            }
-        }
-        const { data } = await axios.put(`https://gray-awful-newt.cyclic.app/api/jobs/${member._id}`, memberInfo, config)
-       
-        setMemberDetails(data.member)
-        if (data.success) {
-            setErrorMessage('')
-            setSuccessMessage('Job added successfully')
-            
-
-        }
-    }
-    catch (error) {
-        console.log(error.response);
-        setSuccessMessage('')
-        setErrorMessage(error.response.data.message);
-    } 
-
-}*/
+console.log(memberDetails)
 const handleSubmit = async (e) => {
   e.preventDefault()
     console.log("submit")
@@ -173,18 +174,18 @@ if (sdate > now || edate>now) {
   else setErrorMessage("Please fill all required(*) fields")
 }
 const handleChange = (e) => {
-  const key = e.target.name;
-  const value = e.target.value;
-  setMemberInfo({ ...memberInfo, [key]: value })
+    const key = e.target.name;
+    const value = e.target.value;
+    setMemberInfo({ ...memberInfo, [key]: value })
 }
 
 
 memberDetails.jobs?.sort(function(a, b) {
-/* var dateA = new Date(a.startDate.split("-").reverse().join("-"));
-var dateB = new Date(b.startDate.split("-").reverse().join("-"));
-return dateB - dateA; */
-let dateA_start = new Date(a.startDate.split("-").reverse().join("-"));
-
+ /* var dateA = new Date(a.startDate.split("-").reverse().join("-"));
+  var dateB = new Date(b.startDate.split("-").reverse().join("-"));
+  return dateB - dateA; */
+  let dateA_start = new Date(a.startDate.split("-").reverse().join("-"));
+ 
 let year = dateA_start.getFullYear();
 let month = dateA_start.getMonth() + 1;
 let day = dateA_start.getDate();
@@ -197,7 +198,7 @@ dateA_start = year + "-" + month + "-" + day;
 let dateA_end=""
 if(a.endDate!=="Invalid Date")
 {
- dateA_end = new Date(a.endDate.split("-").reverse().join("-"));
+   dateA_end = new Date(a.endDate.split("-").reverse().join("-"));
 
 let year = dateA_end.getFullYear();
 let month = dateA_end.getMonth() + 1;
@@ -211,7 +212,7 @@ dateA_end = year + "-" + month + "-" + day;
 }
 
 let dateB_start = new Date(b.startDate.split("-").reverse().join("-"));
-
+ 
 let year_b = dateB_start.getFullYear();
 let month_b = dateB_start.getMonth() + 1;
 let day_b = dateB_start.getDate();
@@ -223,7 +224,7 @@ dateB_start = year_b + "-" + month_b + "-" + day_b;
 let dateB_end=""
 if(b.endDate!=="Invalid Date")
 {
- dateB_end = new Date(b.endDate.split("-").reverse().join("-"));
+   dateB_end = new Date(b.endDate.split("-").reverse().join("-"));
 
 let year = dateB_end.getFullYear();
 let month = dateB_end.getMonth() + 1;
@@ -242,31 +243,36 @@ console.log(dateB_start)
 console.log(dateB_end)
 
 
-if (a.endDate === "Invalid Date") {
-  if (b.endDate === "Invalid Date") {
-    return new Date(dateB_start) - new Date(dateA_start);
+  if (a.endDate === "Invalid Date") {
+    if (b.endDate === "Invalid Date") {
+      return new Date(dateB_start) - new Date(dateA_start);
+    } else {
+      return -1;
+    }
   } else {
-    return -1;
+    if (b.endDate === "Invalid Date") {
+      return 1;
+    } else {
+      return new Date(dateB_end) - new Date(dateA_end);
+    }
   }
-} else {
-  if (b.endDate === "Invalid Date") {
-    return 1;
-  } else {
-    return new Date(dateB_end) - new Date(dateA_end);
-  }
-}
 }); 
 
 const handleDateChange = event => {
-console.log(event.target)
-const key = event.target.name;
-const newDate = event.target.value;
-console.log(newDate)
-// const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
-setMemberInfo({ ...memberInfo, [key]: newDate })
+  console.log(event.target)
+  const key = event.target.name;
+  const newDate = event.target.value;
+  console.log(newDate)
+ // const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
+  setMemberInfo({ ...memberInfo, [key]: newDate })
 };
+
   return (
-   <>
+    <>
+   {
+    !loading?
+    
+    <>
    <Modal className="modal-class" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add new job experiance</Modal.Title>
@@ -348,14 +354,10 @@ setMemberInfo({ ...memberInfo, [key]: newDate })
               <div className="title">
                      {
   userData.userInfo.user && (
-    
-      memberDetails.username===JSON.parse(userData.userInfo.user).username &&
-      <div className='add-experiance'>
+    <div className='add-experiance'>
       <p>Add experience</p>
       <p><FontAwesomeIcon onClick={handleShow} icon={faPlus}/></p>
       </div>
-    
-   
   )
   }
               </div>
@@ -375,7 +377,8 @@ setMemberInfo({ ...memberInfo, [key]: newDate })
             )
           )
         })
-    }  
+    }
+            
             </div>
             <div className="infos" style={{paddingBottom:'10px'}}>
               <div className="title">
@@ -442,9 +445,10 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
           </section>
           
         </main>
-   </>
-    
+   </>:<Loader/>
+   }
+    </>
   )
 }
 
-export default Resume
+export default WithLayout(EditUserProfileScreen)
