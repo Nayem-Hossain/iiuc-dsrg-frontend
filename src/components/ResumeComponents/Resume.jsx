@@ -348,6 +348,8 @@ setMemberInfo({ ...memberInfo, [key]: newDate })
               <div className="title">
                      {
   userData.userInfo.user && (
+    
+      memberDetails.username===(JSON.parse(localStorage.getItem('userInfo'))).username &&
       <div className='add-experiance'>
       <p>Add experience</p>
       <p><FontAwesomeIcon onClick={handleShow} icon={faPlus}/></p>
