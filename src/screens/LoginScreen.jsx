@@ -36,7 +36,7 @@ const LoginScreen = () => {
             const { data } = await axios.post('https://gray-awful-newt.cyclic.app/login', { username, password }, config)
             localStorage.setItem('userInfo', JSON.stringify(data))
             userData.userInfo.setUser(data)
-            navigate('/admin')
+            navigate('/')
         }
         catch (error) {
             console.log(error.response.data)

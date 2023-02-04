@@ -74,6 +74,7 @@ const Header = () => {
               to="/about">About</Nav.Link>
             {
               userInfo ?
+                userInfo.isAdmin?
                 <>
                   <NavDropdown
                     className={`${(currentLocation !== "/about" && currentLocation !== "/publication" && currentLocation !== "/" && currentLocation !== "/events-news" && currentLocation !== "/blogs" && currentLocation !== "/members" && !(params.id)) ?
@@ -87,6 +88,16 @@ const Header = () => {
                     </NavDropdown.Item>
                   </NavDropdown>
                 </> :
+                <>
+                 <NavDropdown
+                    title={`${userInfo.username}`} id="navbarScrollingDropdown">
+                    <NavDropdown.Item as={Link} to="/user-profile">Profile</NavDropdown.Item>
+                     <NavDropdown.Item >
+                      <p onClick={handleLogOut}>Logout</p>
+
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>:
                 <Nav.Link as={Link}
                   to="/login">
                   <span style={{ cursor: "pointer" }}>Login</span>
