@@ -39,7 +39,8 @@ const Header = () => {
 
             <NavDropdown
               className={`${(currentLocation !== "/about" && currentLocation !== "/publication"
-                && currentLocation !== "/" && currentLocation !== "/events-news" && currentLocation !== "/blogs" && !params.eid) ?
+                && currentLocation !== "/" && currentLocation !== "/events-news" && currentLocation !== "/blogs" 
+                && currentLocation !== "/add-blog" && !params.eid && !params.bid) ?
                 "activeNavLink" : ""}`} title="Team" id="navbarScrollingDropdown">
               <NavDropdown.Item className={`${currentLocation === "/founder-and-head" ? "activeNavLink" : ""}`} as={Link} to="/founder-and-head">Founder and Head</NavDropdown.Item>
               <NavDropdown.Item className={`${currentLocation === "/advisory-panel" ? "activeNavLink" : ""}`} as={Link} to="/advisory-panel">Advisory Panel</NavDropdown.Item>
@@ -61,7 +62,7 @@ const Header = () => {
             </Nav.Link>
            
             <Nav.Link as={Link}
-              className={`${currentLocation === "/blogs" ? "activeNavLink" : ""}`}
+              className={`${currentLocation === "/blogs"||params.bid ? "activeNavLink" : ""}`}
               to="/blogs">
               Blogs
             </Nav.Link>
@@ -96,7 +97,7 @@ const Header = () => {
                       <NavDropdown.Item as={Link} to="/change-password">Change Password</NavDropdown.Item>
                     
                     <NavDropdown.Item as={Link} to="/my-profile">Profile</NavDropdown.Item>
-                    
+                    <NavDropdown.Item as={Link} to="/add-blog">Write Blog</NavDropdown.Item>
                      <NavDropdown.Item >
                       <p onClick={handleLogOut}>Logout</p>
 
