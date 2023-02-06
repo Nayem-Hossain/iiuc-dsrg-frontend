@@ -93,7 +93,10 @@ const Header = () => {
                 <>
                  <NavDropdown
                     title={`${userInfo.username}`} id="navbarScrollingDropdown">
+                      <NavDropdown.Item as={Link} to="/change-password">Change Password</NavDropdown.Item>
+                    
                     <NavDropdown.Item as={Link} to="/my-profile">Profile</NavDropdown.Item>
+                    
                      <NavDropdown.Item >
                       <p onClick={handleLogOut}>Logout</p>
 

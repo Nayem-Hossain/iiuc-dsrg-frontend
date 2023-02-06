@@ -33,7 +33,7 @@ const AddEventScreen = () => {
     const [successMessage, setSuccessMessage] = useState('')
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(eventInfo)
+       
         const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
 
        if(eventInfo.title!=="" && eventInfo.event_image!=="" && 

@@ -27,32 +27,10 @@ const EventsAndNews = () => {
 
 
     const times=[];
-   /* events.sort(function(a, b) {
-        var dateA = new Date(a.date);
-        var dateB = new Date(b.date);
-        return dateB - dateA;
-      }); */
-      console.log(events)
+ 
+     
       function getTimeAgo(givenDate) {
-      /*  const currentTime = new Date();
-        const elapsedTime = currentTime - postTime;
-        const elapsedMinutes = Math.floor(elapsedTime / (1000 * 60));
-        const elapsedHours = Math.floor(elapsedTime / (1000 * 60 * 60));
-        const elapsedDays = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-        const elapsedMonths = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 30));
-        const elapsedYears = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 365));
       
-        if (elapsedMinutes < 60) {
-          return `${elapsedMinutes} minutes ago`;
-        } else if (elapsedHours < 24) {
-          return `${elapsedHours} hours ago`;
-        } else if (elapsedDays < 30) {
-          return `${elapsedDays} days ago`;
-        } else if (elapsedMonths < 12) {
-          return `${elapsedMonths} months ago`;
-        } else {
-          return `${elapsedYears} years ago`;
-        }*/
         const currentDate = new Date();
 const diffInTime = currentDate - givenDate;
 const diffInMinutes = diffInTime / (1000 * 60);

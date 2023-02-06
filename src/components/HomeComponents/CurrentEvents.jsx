@@ -26,7 +26,7 @@ const CurrentEvents = () => {
         var dateB = new Date(b.date);
         return dateB - dateA;
       });
-      console.log(events)
+     
     return (
         <Container className="my-5">
             <div className='title-div partners mb-5'>

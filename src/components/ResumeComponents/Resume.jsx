@@ -48,41 +48,10 @@ useEffect(()=>{
    }
 },[member])
 
-/*const handleSubmit = async (e) => {
 
-    const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
-
-    e.preventDefault()
-  
-    try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                 Authorization:`Bearer ${user.token}`
-            }
-        }
-        const { data } = await axios.put(`https://gray-awful-newt.cyclic.app/api/jobs/${member._id}`, memberInfo, config)
-       
-        setMemberDetails(data.member)
-        if (data.success) {
-            setErrorMessage('')
-            setSuccessMessage('Job added successfully')
-            
-
-        }
-    }
-    catch (error) {
-        console.log(error.response);
-        setSuccessMessage('')
-        setErrorMessage(error.response.data.message);
-    } 
-
-}*/
 const handleSubmit = async (e) => {
   e.preventDefault()
-    console.log("submit")
-    console.log(memberInfo)
-    
+   
     if(memberInfo.company!=="" && memberInfo.startDate!=="" &&memberInfo.designation!==""){
    
     
@@ -93,8 +62,7 @@ const handleSubmit = async (e) => {
     memberInfo.startDate=startDate.replace(/\//g, '-');
     memberInfo.endDate=endDate.replace(/\//g, '-');
     setMemberInfo(memberInfo)
-    console.log(memberInfo)
-
+  
     const sdate = new Date(memberInfo.startDate.split("-").reverse().join("-"));
     const edate = new Date(memberInfo.endDate.split("-").reverse().join("-"));
     
@@ -235,11 +203,7 @@ day = day < 10 ? "0" + day : day;
 dateB_end = year + "-" + month + "-" + day;
 
 }
-console.log("ok")
-console.log(dateA_start)
-console.log(dateA_end)
-console.log(dateB_start)
-console.log(dateB_end)
+
 
 
 if (a.endDate === "Invalid Date") {
@@ -258,10 +222,8 @@ if (a.endDate === "Invalid Date") {
 }); 
 
 const handleDateChange = event => {
-console.log(event.target)
 const key = event.target.name;
 const newDate = event.target.value;
-console.log(newDate)
 // const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
 setMemberInfo({ ...memberInfo, [key]: newDate })
 };
@@ -390,12 +352,25 @@ setMemberInfo({ ...memberInfo, [key]: newDate })
                   </p>
             </div>
             <div className="infos" style={{paddingBottom:'10px'}}>
-              <div className="title">
-                <h4>Researches and Publications</h4>
-                <span className="icons"> 
-                  <i className="fa-solid fa-plus" />
-                  <i className="fa-solid fa-pen" />
-                </span>
+              <div className="title" style={{display:'block'}}>
+              { memberDetails.reseachers_and_publications && memberDetails.reseachers_and_publications.length>0?
+                <h4>Publications</h4>:null }
+              {
+               
+      memberDetails.reseachers_and_publications &&
+       memberDetails.reseachers_and_publications.length>0 && 
+      memberDetails.reseachers_and_publications.map(pub=>{
+          
+          return (
+            (
+              <>
+                 <h5>{pub.paper_name}</h5>
+                 <p style={{marginBottom:'20px'}}>{pub.authors}</p>
+        </>
+            )
+          )
+        })
+    }
               </div>
              {/* <p><span style={{fontWeight:'bold'}}>Interpretable Machine Learning for COVID-19: An Empirical Study on Severity Prediction Task</span><br />&nbsp;&nbsp; &nbsp; &nbsp;Authors:Han Wu, College of Engineering, Mathematics & Physical Sciences, University of Exeter, 3286 Exeter, United Kingdom of Great Britain and Northern Ireland, EX4 4QJ (e-mail: hw630@exeter.ac.uk)  
 Wenjie Ruan, College of Engineering, Mathematics & Physical Sciences, University of Exeter, 3286 Exeter, United Kingdom of Great Britain and Northern Ireland, (e-mail: W.Ruan@exeter.ac.uk)  
@@ -404,18 +379,23 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
   Bei Liu, Department of Gastroenterology, The 910 Hospital of PLA, Quanzhou, China, (e-mail: liubei0927@outlook.com)</p> */}
             </div>
             <div className="skills">
-              <div className="title">
-                <h4>Skills</h4>
-                <span className="icons double_icons"> 
-                 
-                  <span>
-                    <i className="fa-solid fa-plus" />
-                    <i className="fa-solid fa-pen" />
-                  </span>
-                </span>
+                <div className="title" style={{display:"block"}}>
+                {memberDetails.skills &&
+                  memberDetails.skills.length > 0 ? (
+                    <h4>Skills</h4>
+                  ) : null}
+                  {memberDetails.skills &&
+                    memberDetails.skills.length > 0 &&
+                    memberDetails.skills.map((skill,index) => {
+                      return (
+                        <>
+                          <span style={{ marginBottom: '10px',color:"#000000" }}>{skill}
+                          {index<memberDetails.skills.length-1?",":null}</span>
+                           </>
+                      )
+                    })}
+                </div>
               </div>
-          
-            </div>
           
             <div className="languages">
               <div className="title">
