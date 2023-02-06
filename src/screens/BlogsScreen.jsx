@@ -92,9 +92,7 @@ if (elapsedMinutes < 60) {
                                     <Row className="d-flex justify-content-between mb-4 single-event">
                                         <Col>
                                             <Card.Body>
-                                            <Card.Text style={{ textAlign: "justify" }}>
-                                                   Written by:{blg.username}
-                                                </Card.Text>
+                                           
                                                 <Card.Title className='fw-bold text-justify'>{blg.title}</Card.Title>
                                                 <Card.Text style={{ textAlign: "justify" }}>
                                                    {blg.description.split(" ").splice(0,50).join(" ")+
