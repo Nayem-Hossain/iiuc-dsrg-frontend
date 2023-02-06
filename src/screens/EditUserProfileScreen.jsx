@@ -111,7 +111,7 @@ const EditUserProfileScreen = () => {
           },
         }
         const {data} = await axios.post(
-          `http://localhost:5000/api/publications/${member.username}`,
+          `https://gray-awful-newt.cyclic.app/api/publications/${member.username}`,
           publication,
           config,
         )
@@ -151,7 +151,7 @@ const EditUserProfileScreen = () => {
           },
         }
         const {data} = await axios.post(
-          `http://localhost:5000/api/skills/${member.username}`,
+          `https://gray-awful-newt.cyclic.app/api/skills/${member.username}`,
           {skills:skills},
           config,
         )
@@ -670,7 +670,7 @@ const EditUserProfileScreen = () => {
               </div>
               <div className="infos" >
                 <div className="title" style={{ display: 'block' }}>
-                  <div className="infos">
+                  <div>
                     <div className="title">
                       {userData.userInfo.user && (
                         <div className="add-experiance">
@@ -708,7 +708,7 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
               </div>
               <div className="skills">
                 <div className="title" style={{display:"block"}}>
-                <div className="infos">
+                <div >
                     <div className="title">
                       {userData.userInfo.user && (
                         <div className="add-experiance">

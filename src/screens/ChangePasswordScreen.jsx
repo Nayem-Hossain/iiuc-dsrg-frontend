@@ -37,7 +37,7 @@ const ChangePasswordScreen = () => {
                   Authorization: `Bearer ${user.token}`,
                 },
               }
-            const { data } = await axios.put('http://localhost:5000/api/changePassword', { currentPassword, newPassword }, config)
+            const { data } = await axios.put('https://gray-awful-newt.cyclic.app/api/changePassword', { currentPassword, newPassword }, config)
             localStorage.setItem('userInfo', JSON.stringify(data))
             userData.userInfo.setUser(data)
             navigate('/')
