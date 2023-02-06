@@ -60,11 +60,21 @@ if (elapsedMinutes < 60) {
   }
       }
       blogs.slice(0).reverse().map((blg)=>{   
-          const postTime = new Date(blg.date);
+          const postTime = new Date(blg.date+"+00:00");
           const timeAgo = getTimeAgo(postTime);
           times.push(timeAgo)
       })
       
+      const postDates=[]
+      blogs.slice(0).reverse().map((blg)=>{   
+        const postTime = new Date(blg.date+"+00:00");
+        const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Dhaka"
+        });
+        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+        postDates.push(bangladeshDateTime)
+    })
+
       const reversed=blogs.slice(0).reverse().map(e=>e)
 
       const indexOfLastBlog=currentPage*blogsPerPage
@@ -99,7 +109,7 @@ if (elapsedMinutes < 60) {
                                         `.....`}
                                         <Link to={`/blogs/${blg._id}`}>Read more</Link>
                                                 </Card.Text>
-                                                <small className="text-muted">{blg.date?.substring(0, 10)}<span 
+                                                <small className="text-muted">{postDates[idx]}<span 
                                                 style={{marginLeft:"10px"}}>updated {times[idx]}</span></small>
                                                 <p className="text-muted">Written by:{blg.username}</p>
                                             </Card.Body>

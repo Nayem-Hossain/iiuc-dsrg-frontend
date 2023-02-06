@@ -26,7 +26,15 @@ const CurrentEvents = () => {
         var dateB = new Date(b.date);
         return dateB - dateA;
       });
-     
+        const postDates=[]
+      events.map((evt)=>{   
+        const postTime = new Date(evt.date+"+00:00");
+        const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Dhaka"
+        });
+        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+        postDates.push(bangladeshDateTime)
+    })
     return (
         <Container className="my-5">
             <div className='title-div partners mb-5'>
@@ -51,7 +59,7 @@ const CurrentEvents = () => {
                                         `.....`}
                                         <Link to={`/events/${ev._id}`}>Read more</Link>
                                     </Card.Text>
-                                    <small className="text-muted">{ev.date?.substring(0, 10)}</small>
+                                    <small className="text-muted">{postDates[idx]}</small>
                                     
                                 </Card.Body>
                             </Card>

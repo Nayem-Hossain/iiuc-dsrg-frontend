@@ -58,10 +58,19 @@ if (elapsedMinutes < 60) {
   }
       }
       events.slice(0).reverse().map((evt)=>{   
-          const postTime = new Date(evt.date);
+          const postTime = new Date(evt.date+"+00:00");
           const timeAgo = getTimeAgo(postTime);
           times.push(timeAgo)
       })
+      const postDates=[]
+      events.slice(0).reverse().map((evt)=>{   
+        const postTime = new Date(evt.date+"+00:00");
+        const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Dhaka"
+        });
+        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+        postDates.push(bangladeshDateTime)
+    })
       
       const reversed=events.slice(0).reverse().map(e=>e)
 
@@ -96,7 +105,9 @@ if (elapsedMinutes < 60) {
                                         `.....`}
                                         <Link to={`/events/${ev._id}`}>Read more</Link>
                                                 </Card.Text>
-                                                <small className="text-muted">{ev.date?.substring(0, 10)}<span 
+                                                <small className="text-muted">{
+                                                    postDates[idx]
+                                                }<span 
                                                 style={{marginLeft:"10px"}}>updated {times[idx]}</span></small>
                                             </Card.Body>
                                         </Col>

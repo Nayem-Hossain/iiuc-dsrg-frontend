@@ -9,7 +9,7 @@ const BlogDetailsScreen = () => {
   const params = useParams()
   const [errorMessage, setErrorMessage] = useState("")
   const [loading,setLoading]=useState(false)
-
+  const [bdTime,setBdTime]=useState("")
   useEffect(() => {
     try {
       const getBlogById = async () => {
@@ -31,6 +31,20 @@ const BlogDetailsScreen = () => {
       setErrorMessage(error.response.data)
     }
   }, [params.bid])
+
+
+  useEffect(()=>{
+    if(blogDetails.date)
+    {
+      const postTime = new Date(blogDetails.date+"+00:00");
+    const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Dhaka"
+    });
+    
+    setBdTime(bangladeshTimeZone.format(postTime))
+    }
+  },[blogDetails])
+
   return (
     <Container className="d-flex justify-content-center">
    {
@@ -45,7 +59,7 @@ const BlogDetailsScreen = () => {
         }}>
        
         <img src={blogDetails.image} />
-        <span style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Posted on:{blogDetails.date?.substring(0, 10)}</span>
+        <span style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Posted on:{bdTime}</span>
         <p style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Written by:{blogDetails.username}</p>
         </div>
            <h3 

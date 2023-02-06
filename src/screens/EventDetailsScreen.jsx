@@ -9,7 +9,7 @@ const EventDetailsScreen = () => {
   const params = useParams()
   const [errorMessage, setErrorMessage] = useState("")
   const [loading,setLoading]=useState(false)
-
+  const [bdTime,setBdTime]=useState("")
   useEffect(() => {
     try {
       const getEventById = async () => {
@@ -31,6 +31,20 @@ const EventDetailsScreen = () => {
       setErrorMessage(error.response.data)
     }
   }, [params.eid])
+
+
+useEffect(()=>{
+  if(eventDetails.date)
+  {
+    const postTime = new Date(eventDetails.date+"+00:00");
+  const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Dhaka"
+  });
+  
+  setBdTime(bangladeshTimeZone.format(postTime))
+  }
+},[eventDetails])
+
   return (
     <Container className="d-flex justify-content-center">
    {
@@ -44,7 +58,7 @@ const EventDetailsScreen = () => {
             maxWidth:'600px',
         }}>
         <img src={eventDetails.image} />
-        <span style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Posted on:{eventDetails.date?.substring(0, 10)}</span>
+        <span style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Posted on:{bdTime}</span>
         </div>
            <h3 
             style={{
