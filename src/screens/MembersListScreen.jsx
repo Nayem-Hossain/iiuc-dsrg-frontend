@@ -22,6 +22,17 @@ const MembersListScreen = () => {
    }
   },[])
     const navigate=useNavigate()
+
+    const userInfo=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
+    
+  useEffect(()=>
+  {
+      if(!userInfo)
+      {
+           navigate('/login')
+      }
+  },[navigate,userInfo])
+  
     const handleDelete=async(memberId)=>{
 
         const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null

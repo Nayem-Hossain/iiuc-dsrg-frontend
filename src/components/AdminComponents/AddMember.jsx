@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 const AddMember = () => {
+    const navigate=useNavigate()
     const [memberInfo, setMemberInfo] = useState({
         username:"",
         name:"",
@@ -11,6 +13,15 @@ const AddMember = () => {
         description: "",
         jobs: []
     })
+    const userInfo=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
+    
+    useEffect(()=>
+    {
+        if(!userInfo)
+        {
+             navigate('/login')
+        }
+    },[navigate,userInfo])
 
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')

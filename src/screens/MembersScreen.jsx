@@ -26,8 +26,6 @@ const MembersScreen = () => {
     }
   }, [])
 
-  
-    
     const indexOfLastMember=currentPage*membersPerPage
     const indexOfFirstMember=indexOfLastMember-membersPerPage
     const curMembers=members.slice(indexOfFirstMember,indexOfLastMember)

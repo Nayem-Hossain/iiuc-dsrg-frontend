@@ -24,8 +24,7 @@ const Commitee = () => {
                   sessions.push(m.session);
                }
              });
-             console.log("sessions")
-             console.log(sessions); 
+             
              function sortDates(dates) {
                return dates.sort((a, b) => {
                  const lastYearA = parseInt(a.split('-')[1]);
@@ -34,8 +33,7 @@ const Commitee = () => {
                });
              }
               const sortedDates = sortDates(sessions);
-             console.log('sortedDates');
-             console.log(sortedDates); 
+            
              setSortedSessions(sortedDates)
              setSelectedSession(sortedDates[0])
             //const data = response.data.filter((d) => d.session === sortedDates[0])
