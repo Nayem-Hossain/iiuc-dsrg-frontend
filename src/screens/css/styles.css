@@ -1182,6 +1182,7 @@ a {
   align-items: flex-start;
   position: relative;
 }
+/* 
 .name_and_school {
   display: flex;
   justify-content: space-between;
@@ -1189,7 +1190,7 @@ a {
   height: 5rem;
   width: 100%;
   text-align: start;
-}
+} 
 .name_and_school h2 {
   font-size: 1.7rem;
   margin-left: 1.5rem;
@@ -1208,6 +1209,18 @@ a {
   height: 2rem;
   margin-right: 1rem;
 }
+.name_and_school {
+  flex-direction: column;
+  gap: 20px;
+}
+.name_and_school {
+  height: auto;
+  margin-bottom: 20px;
+}
+.name_and_school h2 {
+  font-size: 1.4rem;
+} */
+
 .personnal_info_profil h4 {
   margin-top: -1rem;
   font-size: 1.1rem;
@@ -3871,17 +3884,7 @@ body {
   .backgound_and_profil {
     height: auto;
   }
-  .name_and_school {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .name_and_school {
-    height: auto;
-    margin-bottom: 20px;
-  }
-  .name_and_school h2 {
-    font-size: 1.4rem;
-  }
+
   .my_goal {
     width: 29%;
     margin-left: 0.7rem;
@@ -3994,18 +3997,6 @@ body {
 #menu_profil {
   z-index: 100006;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Admin Login Page (Nayem) */
 

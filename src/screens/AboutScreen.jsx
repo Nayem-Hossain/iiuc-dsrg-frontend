@@ -5,7 +5,6 @@ import Mission from '../components/AboutComponents/Mission'
 import Vision from '../components/AboutComponents/Vision'
 import WellWishers from '../components/AboutComponents/WellWishers'
 import WithLayout from '../Layout/WithLayout'
-import WellWishers from '../components/AboutComponents/WellWishers'
 const AboutScreen = () => {
   return (
     <>

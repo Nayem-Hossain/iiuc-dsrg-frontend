@@ -232,6 +232,9 @@ return dateB - dateA; */
     // const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
     setMemberInfo({ ...memberInfo, [key]: newDate })
   }
+  const handleGmailClick = () => {
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${memberDetails.email}`, "_blank");
+  };
   return (
     <>
       <Modal className="modal-class" show={show} onHide={handleClose}>
@@ -264,8 +267,9 @@ return dateB - dateA; */
                     />
                   </div>
                   {/*   <div class="form-group">
-                                            <input type="text" onChange={handleChange} name="startDate" class="form-control" placeholder="Start date" value={memberInfo.startDate} />
-                                     </div> */}
+                        <input type="text" onChange={handleChange} name="startDate" class="form-control" placeholder="Start date" value={memberInfo.startDate} />
+                        </div> 
+                  */}
                   <div class="form-group">
                     <input
                       type="date"
@@ -276,6 +280,7 @@ return dateB - dateA; */
                       value={memberInfo.startDate}
                     />
                   </div>
+
                   <div class="form-group">
                     <input
                       type="date"
@@ -319,7 +324,110 @@ return dateB - dateA; */
 
       <main className="profil_page">
         <section className="left_box">
+
+          {/* Profile Information Section 1*/}
+
+          {/* <div className="profil_info" id="pro_info">
+            <div className="backgound_and_profil">
+              <img
+                className="background_img"
+                src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1675235929/dsrgcv_gtmmoc.jpg"
+                alt="#"
+              />
+              <img
+                className="profil_pic"
+                src={memberDetails.profileImg || ProfileImg}
+                alt="#"
+              />
+            </div>
+
+            <div className="personnal_info_profil">
+              <i className="fa-solid fa-pencil" />
+              <div className="name_and_school">
+                <div>
+                  <h2>{memberDetails.name}</h2>
+                  {memberDetails.jobs?.length > 0 &&
+                    memberDetails.jobs[0].endDate === 'Invalid Date' && (
+                      <p>
+                        {memberDetails.jobs[0].designation} at{' '}
+                        {memberDetails.jobs[0].company}
+                      </p>
+                    )}
+                </div>
+                <div className='d-flex align-items-center justify-content-between'>
+                  <div>
+                    <p>
+                      {designation !== '' && (
+                        <span>{designation}</span>
+                      )}
+                    </p>
+                    <p>IIUC Data Science Research Group</p>
+                  </div>
+                  <div>
+                    <button onClick={handleGmailClick} className='btn btn-outline-dark rounded-pill px-4 mx-4'><i
+                      class="bi bi-envelope-fill"
+                    ></i>&nbsp;&nbsp;Contact</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+
+          {/* Profile Information Section 2*/}
+
           <div className="profil_info" id="pro_info">
+            <div className="backgound_and_profil">
+              <img
+                className="background_img"
+                src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1675235929/dsrgcv_gtmmoc.jpg"
+                alt="#"
+              />
+              <img
+                className="profil_pic"
+                src={memberDetails.profileImg || ProfileImg}
+                alt="#"
+              />
+            </div>
+
+            <div className="personnal_info_profil">
+              <i className="fa-solid fa-pencil" />
+              <div className="name_and_school">
+                <div className='d-flex align-items-center justify-content-between'>
+                  <div>
+                    <h2>{memberDetails.name}</h2>
+                    {memberDetails.jobs?.length > 0 &&
+                      memberDetails.jobs[0].endDate === 'Invalid Date' && (
+                        <p>
+                          {memberDetails.jobs[0].designation} at{' '}
+                          {memberDetails.jobs[0].company}
+                        </p>
+                      )}
+                  </div>
+                  <div>
+                    <button onClick={handleGmailClick} className='btn btn-outline-dark rounded-pill px-4 mx-4'><i
+                      class="bi bi-envelope-fill"
+                    ></i>&nbsp;&nbsp;Contact</button>
+                  </div>
+                </div>
+                <div>
+                  <p>
+                    {designation !== '' && (
+                      <span>{designation}</span>
+                    )}
+                  </p>
+                  <p>IIUC Data Science Research Group</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          {/* <div className="profil_info" id="pro_info">
             <div className="backgound_and_profil">
               <img
                 className="background_img"
@@ -344,7 +452,6 @@ return dateB - dateA; */
                     </p>
                   )}
                 <p>
-                  {/*  <img src={BrandImg} alt="#" /> */}
                   {designation !== '' && (
                     <span>{designation},IIUC Data Science Research Group</span>
                   )}
@@ -363,7 +470,7 @@ return dateB - dateA; */
                 </a>
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="infos" style={{ paddingBottom: '10px' }}>
             <div className="title">
@@ -372,47 +479,47 @@ return dateB - dateA; */
             </div>
             <p>{memberDetails.description}</p>
           </div>
-          
+
 
           {userData.userInfo.user && (
             <div className="title">
-             { memberDetails.username===(JSON.parse(localStorage.getItem('userInfo'))).username
-              &&
-              <div className="add-experiance">
-                <p>Add experience</p>
-                <p>
-                  <FontAwesomeIcon onClick={handleShow} icon={faPlus} />
-                </p>
-              </div>
-            }           
+              {memberDetails.username === (JSON.parse(localStorage.getItem('userInfo'))).username
+                &&
+                <div className="add-experiance">
+                  <p>Add experience</p>
+                  <p>
+                    <FontAwesomeIcon onClick={handleShow} icon={faPlus} />
+                  </p>
+                </div>
+              }
             </div>
           )}
-          {memberDetails.jobs && memberDetails.jobs.length > 0 &&(
-          <div className="infos" style={{ paddingBottom: '10px' }}>
-           
-            
-            {memberDetails.jobs && memberDetails.jobs.length > 0 ? (
-              <h4 style={{ padding: '10px' }}>Experiences</h4>
-            ) : null}
-            {memberDetails.jobs &&
-              memberDetails.jobs.length > 0 &&
-              memberDetails.jobs.map((job) => {
-                return (
-                  <>
-                    <p style={{ marginBottom: '20px' }}>
-                      <img src="#" alt="" /> &nbsp;{' '}
-                      <span>{job.designation}</span> <br /> &nbsp; &nbsp;
-                      &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                      {job.company}
-                      <br /> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
-                      &nbsp; &nbsp;[{job.startDate}] - [
-                      {job.endDate === 'Invalid Date' ? 'Present' : job.endDate}
-                      ]<br />
-                    </p>
-                  </>
-                )
-              })}
-          </div>)}
+          {memberDetails.jobs && memberDetails.jobs.length > 0 && (
+            <div className="infos" style={{ paddingBottom: '10px' }}>
+
+
+              {memberDetails.jobs && memberDetails.jobs.length > 0 ? (
+                <h4 style={{ padding: '10px' }}>Experiences</h4>
+              ) : null}
+              {memberDetails.jobs &&
+                memberDetails.jobs.length > 0 &&
+                memberDetails.jobs.map((job) => {
+                  return (
+                    <>
+                      <p style={{ marginBottom: '20px' }}>
+                        <img src="#" alt="" /> &nbsp;{' '}
+                        <span>{job.designation}</span> <br /> &nbsp; &nbsp;
+                        &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                        {job.company}
+                        <br /> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                        &nbsp; &nbsp;[{job.startDate}] - [
+                        {job.endDate === 'Invalid Date' ? 'Present' : job.endDate}
+                        ]<br />
+                      </p>
+                    </>
+                  )
+                })}
+            </div>)}
           <div className="infos" style={{ paddingBottom: '10px' }}>
             <div className="title">
               <h4>Education</h4>
@@ -440,50 +547,50 @@ return dateB - dateA; */
             </p>
           </div>
           {memberDetails.reseachers_and_publications &&
-              memberDetails.reseachers_and_publications.length > 0 && (
-          <div className="infos" style={{ paddingBottom: '10px' }}>
-            <div className="title" style={{ display: 'block' }}>
-              {memberDetails.reseachers_and_publications &&
-              memberDetails.reseachers_and_publications.length > 0 ? (
-                <h4>Publications</h4>
-              ) : null}
-              {memberDetails.reseachers_and_publications &&
-                memberDetails.reseachers_and_publications.length > 0 &&
-                memberDetails.reseachers_and_publications.map((pub) => {
-                  return (
-                    <>
-                      <h5>{pub.paper_name}</h5>
-                      <p style={{ marginBottom: '20px' }}>{pub.authors}</p>
-                    </>
-                  )
-                })}
+            memberDetails.reseachers_and_publications.length > 0 && (
+              <div className="infos" style={{ paddingBottom: '10px' }}>
+                <div className="title" style={{ display: 'block' }}>
+                  {memberDetails.reseachers_and_publications &&
+                    memberDetails.reseachers_and_publications.length > 0 ? (
+                    <h4>Publications</h4>
+                  ) : null}
+                  {memberDetails.reseachers_and_publications &&
+                    memberDetails.reseachers_and_publications.length > 0 &&
+                    memberDetails.reseachers_and_publications.map((pub) => {
+                      return (
+                        <>
+                          <h5>{pub.paper_name}</h5>
+                          <p style={{ marginBottom: '20px' }}>{pub.authors}</p>
+                        </>
+                      )
+                    })}
+                </div>
+                {/* <p><span style={{fontWeight:'bold'}}>Interpretable Machine Learning for COVID-19: An Empirical Study on Severity Prediction Task</span><br />&nbsp;&nbsp; &nbsp; &nbsp;Authors:Han Wu, College of Engineering, Mathematics & Physical Sciences, University of Exeter, 3286 Exeter, United Kingdom of Great Britain and Northern Ireland, EX4 4QJ (e-mail: hw630@exeter.ac.uk)  
+                    Wenjie Ruan, College of Engineering, Mathematics & Physical Sciences, University of Exeter, 3286 Exeter, United Kingdom of Great Britain and Northern Ireland, (e-mail: W.Ruan@exeter.ac.uk)  
+                    Jiangtao Wang, Faculty Research Centre for Intelligent Healthcare, Coventry University, 2706 Coventry, West Midlands, United Kingdom of Great Britain and Northern Ireland, (e-mail: jiangtao.wang@coventry.ac.uk)  
+                    Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry University, 2706 Coventry, West Midlands, United Kingdom of Great Britain and Northern Ireland, (e-mail: ad4291@coventry.ac.uk)  
+                    Bei Liu, Department of Gastroenterology, The 910 Hospital of PLA, Quanzhou, China, (e-mail: liubei0927@outlook.com)</p> */}
+              </div>)}
+          {memberDetails.skills && memberDetails.skills.length > 0 && (
+            <div className="skills">
+              <div className="title" style={{ display: 'block' }}>
+                {memberDetails.skills && memberDetails.skills.length > 0 ? (
+                  <h4>Skills</h4>
+                ) : null}
+                {memberDetails.skills &&
+                  memberDetails.skills.length > 0 &&
+                  memberDetails.skills.map((skill, index) => {
+                    return (
+                      <>
+                        <span style={{ marginBottom: '10px', color: '#000000' }}>
+                          {skill}
+                          {index < memberDetails.skills.length - 1 ? ',' : null}
+                        </span>
+                      </>
+                    )
+                  })}
+              </div>
             </div>
-            {/* <p><span style={{fontWeight:'bold'}}>Interpretable Machine Learning for COVID-19: An Empirical Study on Severity Prediction Task</span><br />&nbsp;&nbsp; &nbsp; &nbsp;Authors:Han Wu, College of Engineering, Mathematics & Physical Sciences, University of Exeter, 3286 Exeter, United Kingdom of Great Britain and Northern Ireland, EX4 4QJ (e-mail: hw630@exeter.ac.uk)  
-Wenjie Ruan, College of Engineering, Mathematics & Physical Sciences, University of Exeter, 3286 Exeter, United Kingdom of Great Britain and Northern Ireland, (e-mail: W.Ruan@exeter.ac.uk)  
-Jiangtao Wang, Faculty Research Centre for Intelligent Healthcare, Coventry University, 2706 Coventry, West Midlands, United Kingdom of Great Britain and Northern Ireland, (e-mail: jiangtao.wang@coventry.ac.uk)  
-Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry University, 2706 Coventry, West Midlands, United Kingdom of Great Britain and Northern Ireland, (e-mail: ad4291@coventry.ac.uk)  
-  Bei Liu, Department of Gastroenterology, The 910 Hospital of PLA, Quanzhou, China, (e-mail: liubei0927@outlook.com)</p> */}
-          </div> )}
-          {memberDetails.skills && memberDetails.skills.length > 0&&(
-          <div className="skills">
-            <div className="title" style={{ display: 'block' }}>
-              {memberDetails.skills && memberDetails.skills.length > 0 ? (
-                <h4>Skills</h4>
-              ) : null}
-              {memberDetails.skills &&
-                memberDetails.skills.length > 0 &&
-                memberDetails.skills.map((skill, index) => {
-                  return (
-                    <>
-                      <span style={{ marginBottom: '10px', color: '#000000' }}>
-                        {skill}
-                        {index < memberDetails.skills.length - 1 ? ',' : null}
-                      </span>
-                    </>
-                  )
-                })}
-            </div>
-          </div>
           )}
           <div className="languages">
             <div className="title">
@@ -514,7 +621,7 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
             </div>
           </div>
         </section>
-      </main>
+      </main >
     </>
   )
 }

@@ -13,7 +13,7 @@ const ContactForm = () => {
                     </div>
                     <div class="row">
 
-                        <div class="col-lg-5">
+                        <div class="col-lg-5 g-5">
                             <div class="single_address">
                                 {/* <FontAwesomeIcon icon={faLocationDot} /> */}
                                 <i class="bi bi-geo-alt-fill"></i>
@@ -25,14 +25,14 @@ const ContactForm = () => {
                                 <h4>Email</h4>
                                 <p>idsrg.info@gmail.com</p>
                             </div>
-                            <div class="single_address">
+                            {/* <div class="single_address">
                                 <i class="bi bi-telephone-outbound-fill"></i>
                                 <h4>Phone</h4>
-                                <p>(+880)&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;</p>
-                            </div>
+                                <p>+880&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;&#10803;</p>
+                            </div> */}
                             <div class="single_address">
                                 <i class="bi bi-stopwatch-fill"></i>
-                                <h4>Oncampus Meeting</h4>
+                                <h4>Research Meeting</h4>
                                 <p>Every Saturday : <br /> 12.00 PM - 01.30 PM.</p>
                             </div>
                         </div>

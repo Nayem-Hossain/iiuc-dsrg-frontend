@@ -31,15 +31,12 @@ const Footer = () => {
                                 </div>
                                 <ul>
                                     <li><a href="#">Home</a></li>
-                                    <li><a href="#">about</a></li>
-                                    <li><a href="#">services</a></li>
-                                    <li><a href="#">portfolio</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">Blogs</a></li>
+                                    <li><a href="#">Publication</a></li>
                                     <li><a href="#">About us</a></li>
-                                    <li><a href="#">Our Services</a></li>
-                                    <li><a href="#">Expert Team</a></li>
+                                    <li><a href="#">Commitee Members</a></li>
                                     <li><a href="#">Contact us</a></li>
-                                    <li><a href="#">Latest News</a></li>
+                                    <li><a href="#">Latest Events & News</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -67,7 +64,7 @@ const Footer = () => {
                     <div className="row">
                         <div className="col-xl-12 col-lg-12 text-center">
                             <div className="copyright-text">
-                                <p>Copyright &copy; 2022, All Right Reserved IIUCDSRG</p>
+                                <p>Copyright &copy; 2022, All Right Reserved IDSRG</p>
                             </div>
                         </div>
 

@@ -25,7 +25,7 @@ const EditUserProfileScreen = () => {
   const [loading, setLoading] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-  
+
   const [showPublicationModel, setShowPublicationModel] = useState(false)
   const handlePublicationModelClose = () => setShowPublicationModel(false)
   const handlePublicationModelShow = () => setShowPublicationModel(true)
@@ -42,10 +42,10 @@ const EditUserProfileScreen = () => {
     jobDescription: '',
   })
   const [publication, setPublication] = useState({
-   pname:"",
-   authors:""
+    pname: "",
+    authors: ""
   })
- const [skills,setSkills]=useState("")
+  const [skills, setSkills] = useState("")
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
   const [designation, setDesignation] = useState('')
@@ -74,13 +74,13 @@ const EditUserProfileScreen = () => {
     }
   }, [])
   useEffect(() => {
-   
+
     try {
       const getCommitteeMembers = async () => {
         const response = await axios.get(
           'https://gray-awful-newt.cyclic.app/api/committee',
         )
-        
+
         const isExecutive = response.data.find(
           (d) => d.username === member.username,
         )
@@ -93,29 +93,28 @@ const EditUserProfileScreen = () => {
     }
   }, [memberDetails])
 
- 
 
-  const handlePublicationSubmit=async (e)=>{
+
+  const handlePublicationSubmit = async (e) => {
     e.preventDefault();
-    
-    if(publication.pname!=="" && publication.authors!=="")
-    {
-      try{
+
+    if (publication.pname !== "" && publication.authors !== "") {
+      try {
         const user = localStorage.getItem('userInfo')
-            ? JSON.parse(localStorage.getItem('userInfo'))
-            : null
+          ? JSON.parse(localStorage.getItem('userInfo'))
+          : null
         const config = {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
           },
         }
-        const {data} = await axios.post(
+        const { data } = await axios.post(
           `https://gray-awful-newt.cyclic.app/api/publications/${member.username}`,
           publication,
           config,
         )
-  
+
         setMemberDetails(data.member)
         if (data.success) {
           setErrorMessage('')
@@ -123,39 +122,37 @@ const EditUserProfileScreen = () => {
           setShowPublicationModel(false)
           setPublication({
             pname: "",
-            authors:""
+            authors: ""
           })
         }
-      }catch(error)
-      {
+      } catch (error) {
         console.log(error)
       }
     }
     else setErrorMessage("All fileds are required")
   }
 
-  const handleSkillsSubmit=async (e)=>{
+  const handleSkillsSubmit = async (e) => {
     e.preventDefault();
-  
-    
-   if(skills!=="")
-    {
-      try{
+
+
+    if (skills !== "") {
+      try {
         const user = localStorage.getItem('userInfo')
-            ? JSON.parse(localStorage.getItem('userInfo'))
-            : null
+          ? JSON.parse(localStorage.getItem('userInfo'))
+          : null
         const config = {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
           },
         }
-        const {data} = await axios.post(
+        const { data } = await axios.post(
           `https://gray-awful-newt.cyclic.app/api/skills/${member.username}`,
-          {skills:skills},
+          { skills: skills },
           config,
         )
-  
+
         setMemberDetails(data.member)
         if (data.success) {
           setErrorMessage('')
@@ -163,17 +160,16 @@ const EditUserProfileScreen = () => {
           setShowSkillModel(false)
           setSkills("")
         }
-      }catch(error)
-      {
+      } catch (error) {
         console.log(error)
       }
     }
-    else setErrorMessage("All fileds are required") 
+    else setErrorMessage("All fileds are required")
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (
       memberInfo.company !== '' &&
       memberInfo.startDate !== '' &&
@@ -187,7 +183,7 @@ const EditUserProfileScreen = () => {
       memberInfo.startDate = startDate.replace(/\//g, '-')
       memberInfo.endDate = endDate.replace(/\//g, '-')
       setMemberInfo(memberInfo)
-      
+
       const sdate = new Date(
         memberInfo.startDate.split('-').reverse().join('-'),
       )
@@ -334,7 +330,7 @@ const EditUserProfileScreen = () => {
 
       dateB_end = year + '-' + month + '-' + day
     }
-    
+
 
     if (a.endDate === 'Invalid Date') {
       if (b.endDate === 'Invalid Date') {
@@ -352,13 +348,18 @@ const EditUserProfileScreen = () => {
   })
 
   const handleDateChange = (event) => {
-    
+
     const key = event.target.name
     const newDate = event.target.value
-    
+
     // const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
     setMemberInfo({ ...memberInfo, [key]: newDate })
   }
+
+  const handleGmailClick = () => {
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${memberDetails.email}`, "_blank");
+  };
+
 
   return (
     <>
@@ -450,9 +451,9 @@ const EditUserProfileScreen = () => {
               </Form>
             </Modal.Body>
           </Modal>
-          
 
-          
+
+
           <Modal className="modal-class" show={showPublicationModel} onHide={handlePublicationModelClose}>
             <Modal.Header closeButton>
               <Modal.Title>Add new publication</Modal.Title>
@@ -482,7 +483,7 @@ const EditUserProfileScreen = () => {
                           value={publication.pname}
                         />
                       </div>
-                    
+
                       <div class="form-group">
                         <input
                           type="text"
@@ -499,7 +500,7 @@ const EditUserProfileScreen = () => {
                         value="Submit"
                       />
                     </div>
-                  
+
                   </div>
                 </div>
               </Form>
@@ -530,21 +531,21 @@ const EditUserProfileScreen = () => {
                       <div class="form-group">
                         <input
                           type="text"
-                          onChange={(e)=>setSkills(e.target.value)}
+                          onChange={(e) => setSkills(e.target.value)}
                           name="skills"
                           class="form-control"
                           placeholder="Skills(Ex:html,css,js)"
                           value={skills}
                         />
                       </div>
-                    
+
                       <input
                         type="submit"
                         class="btnRegister"
                         value="Submit"
                       />
                     </div>
-                  
+
                   </div>
                 </div>
               </Form>
@@ -565,38 +566,45 @@ const EditUserProfileScreen = () => {
                     alt="#"
                   />
                 </div>
+
                 <div className="personnal_info_profil">
                   <i className="fa-solid fa-pencil" />
                   <div className="name_and_school">
-                    <h2>{memberDetails.name}</h2>
-                    {memberDetails.jobs?.length > 0 &&
-                      memberDetails.jobs[0].endDate === 'Invalid Date' && (
+                    <div>
+                      <h2>{memberDetails.name}</h2>
+                      {memberDetails.jobs?.length > 0 &&
+                        memberDetails.jobs[0].endDate === 'Invalid Date' && (
+                          <p>
+                            {memberDetails.jobs[0].designation} at{' '}
+                            {memberDetails.jobs[0].company}
+                          </p>
+                        )}
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between'>
+                      <div>
                         <p>
-                          {memberDetails.jobs[0].designation} at{' '}
-                          {memberDetails.jobs[0].company}
+                          {designation !== '' && (
+                            <span>{designation}</span>
+                          )}
                         </p>
-                      )}
-                    <p>
-                      {/*  <img src={BrandImg} alt="#" /> */}
-                      {designation !== '' && (
-                        <span>
-                          {designation},IIUC Data Science Research Group
-                        </span>
-                      )}
-                    </p>
+                        <p>IIUC Data Science Research Group</p>
+                      </div>
+                      <div>
+                        <button onClick={handleGmailClick} className='btn btn-outline-dark rounded-pill px-4 mx-4'><i
+                          class="bi bi-envelope-fill"
+                        ></i>&nbsp;&nbsp;Contact</button>
+                      </div>
+                    </div>
                   </div>
-                  <p
-                    style={{ marginLeft: '75%', marginBottom: '10px' }}
-                    className="mail_to"
-                  >
-                    <a href={`mailto:${memberDetails.email}`}>
-                      Contact
-                      <i
-                        style={{ paddingLeft: '2px', marginTop: '3px' }}
-                        class="bi bi-envelope"
-                      ></i>
-                    </a>
-                  </p>
+                  {/* <p
+                style={{ marginLeft: '75%', marginBottom: '10px' }}
+                className="mail_to"
+              >
+                <button onClick={handleGmailClick} className='btn btn-outline-dark rounded-pill px-4'><i
+                  class="bi bi-envelope-fill"
+                ></i>&nbsp;&nbsp;Contact</button>
+
+              </p> */}
                 </div>
               </div>
 
@@ -686,7 +694,7 @@ const EditUserProfileScreen = () => {
                     </div>
                   </div>
                   {memberDetails.reseachers_and_publications &&
-                  memberDetails.reseachers_and_publications.length > 0 ? (
+                    memberDetails.reseachers_and_publications.length > 0 ? (
                     <h4>Publications</h4>
                   ) : null}
                   {memberDetails.reseachers_and_publications &&
@@ -707,8 +715,8 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
   Bei Liu, Department of Gastroenterology, The 910 Hospital of PLA, Quanzhou, China, (e-mail: liubei0927@outlook.com)</p> */}
               </div>
               <div className="skills">
-                <div className="title" style={{display:"block"}}>
-                <div >
+                <div className="title" style={{ display: "block" }}>
+                  <div >
                     <div className="title">
                       {userData.userInfo.user && (
                         <div className="add-experiance">
@@ -723,18 +731,18 @@ Dingchang Zheng, Faculty Research Centre for Intelligent Healthcare, Coventry Un
                       )}
                     </div>
                   </div>
-                {memberDetails.skills &&
-                  memberDetails.skills.length > 0 ? (
+                  {memberDetails.skills &&
+                    memberDetails.skills.length > 0 ? (
                     <h4>Skills</h4>
                   ) : null}
                   {memberDetails.skills &&
                     memberDetails.skills.length > 0 &&
-                    memberDetails.skills.map((skill,index) => {
+                    memberDetails.skills.map((skill, index) => {
                       return (
                         <>
-                          <span style={{ marginBottom: '10px',color:"#000000" }}>{skill}
-                          {index<memberDetails.skills.length-1?",":null}</span>
-                           </>
+                          <span style={{ marginBottom: '10px', color: "#000000" }}>{skill}
+                            {index < memberDetails.skills.length - 1 ? "," : null}</span>
+                        </>
                       )
                     })}
                 </div>
