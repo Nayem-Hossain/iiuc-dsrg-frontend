@@ -232,6 +232,10 @@ return dateB - dateA; */
     // const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
     setMemberInfo({ ...memberInfo, [key]: newDate })
   }
+
+  const handleGmailClick = () => {
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${memberDetails.email}`, "_blank");
+  };
   return (
     <>
       <Modal className="modal-class" show={show} onHide={handleClose}>
@@ -319,7 +323,110 @@ return dateB - dateA; */
 
       <main className="profil_page">
         <section className="left_box">
+          
+          {/* Profile Information Section 1*/}
+
+          {/* <div className="profil_info" id="pro_info">
+            <div className="backgound_and_profil">
+              <img
+                className="background_img"
+                src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1675235929/dsrgcv_gtmmoc.jpg"
+                alt="#"
+              />
+              <img
+                className="profil_pic"
+                src={memberDetails.profileImg || ProfileImg}
+                alt="#"
+              />
+            </div>
+
+            <div className="personnal_info_profil">
+              <i className="fa-solid fa-pencil" />
+              <div className="name_and_school">
+                <div>
+                  <h2>{memberDetails.name}</h2>
+                  {memberDetails.jobs?.length > 0 &&
+                    memberDetails.jobs[0].endDate === 'Invalid Date' && (
+                      <p>
+                        {memberDetails.jobs[0].designation} at{' '}
+                        {memberDetails.jobs[0].company}
+                      </p>
+                    )}
+                </div>
+                <div className='d-flex align-items-center justify-content-between'>
+                  <div>
+                    <p>
+                      {designation !== '' && (
+                        <span>{designation}</span>
+                      )}
+                    </p>
+                    <p>IIUC Data Science Research Group</p>
+                  </div>
+                  <div>
+                    <button onClick={handleGmailClick} className='btn btn-outline-dark rounded-pill px-4 mx-4'><i
+                      class="bi bi-envelope-fill"
+                    ></i>&nbsp;&nbsp;Contact</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+
+          {/* Profile Information Section 2*/}
+
           <div className="profil_info" id="pro_info">
+            <div className="backgound_and_profil">
+              <img
+                className="background_img"
+                src="https://res.cloudinary.com/dpdq2a9fu/image/upload/v1675235929/dsrgcv_gtmmoc.jpg"
+                alt="#"
+              />
+              <img
+                className="profil_pic"
+                src={memberDetails.profileImg || ProfileImg}
+                alt="#"
+              />
+            </div>
+
+            <div className="personnal_info_profil">
+              <i className="fa-solid fa-pencil" />
+              <div className="name_and_school">
+                <div className='d-flex align-items-center justify-content-between'>
+                  <div>
+                    <h2>{memberDetails.name}</h2>
+                    {memberDetails.jobs?.length > 0 &&
+                      memberDetails.jobs[0].endDate === 'Invalid Date' && (
+                        <p>
+                          {memberDetails.jobs[0].designation} at{' '}
+                          {memberDetails.jobs[0].company}
+                        </p>
+                      )}
+                  </div>
+                  <div>
+                    <button onClick={handleGmailClick} className='btn btn-outline-dark rounded-pill px-4 mx-4'><i
+                      class="bi bi-envelope-fill"
+                    ></i>&nbsp;&nbsp;Contact</button>
+                  </div>
+                </div>
+                <div>
+                  <p>
+                    {designation !== '' && (
+                      <span>{designation}</span>
+                    )}
+                  </p>
+                  <p>IIUC Data Science Research Group</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          {/* <div className="profil_info" id="pro_info">
             <div className="backgound_and_profil">
               <img
                 className="background_img"
@@ -344,7 +451,6 @@ return dateB - dateA; */
                     </p>
                   )}
                 <p>
-                  {/*  <img src={BrandImg} alt="#" /> */}
                   {designation !== '' && (
                     <span>{designation},IIUC Data Science Research Group</span>
                   )}
@@ -363,7 +469,7 @@ return dateB - dateA; */
                 </a>
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="infos" style={{ paddingBottom: '10px' }}>
             <div className="title">

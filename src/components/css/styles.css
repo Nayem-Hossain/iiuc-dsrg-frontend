@@ -1118,7 +1118,7 @@ a {
 /* ----------------left box profil page------- */
 .profil_page {
   display: flex;
- /* width: 75%;*/
+  /* width: 75%;*/
   margin: 2rem auto;
 }
 .left_box {
@@ -1174,26 +1174,35 @@ a {
   background-color: #dfdddb;
 }
 .personnal_info_profil {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   width: 100%;
   height: auto;
   padding-top: 4rem;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   position: relative;
 }
+
 .name_and_school {
+  height: auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+/* .name_and_school {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
   align-items: flex-start;
-  height: 5rem;
-  width: 100%;
   flex-direction: column;
+  height: auto;
+  width: 100%;
+  margin-bottom: 20px;
   text-align: start;
-}
+} */
+
 .name_and_school h2 {
   font-size: 1.7rem;
-  margin-left: 1.5rem;
+  margin: 0 0 0 1.5rem;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -3821,12 +3830,12 @@ body {
 /* ====== medias profile page========    */
 
 @media screen and (max-width: 1250px) {
- /* .profil_page {
+  /* .profil_page {
     width: 85%; 
   }*/
 }
 @media screen and (max-width: 1150px) {
- /* .profil_page {
+  /* .profil_page {
     width: 90%;
   } */
 }
@@ -3847,12 +3856,12 @@ body {
     position: relative;
     top: -0.3rem;
   }
-  
+
   #right_box {
     display: block;
     width: 37%;
   }
- /* .profil_page {
+  /* .profil_page {
     width: 75%;
   } */
   .stat_boxes {
@@ -3869,17 +3878,7 @@ body {
   .backgound_and_profil {
     height: auto;
   }
-  .name_and_school {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .name_and_school {
-    height: auto;
-    margin-bottom: 20px;
-  }
-  .name_and_school h2 {
-    font-size: 1.4rem;
-  }
+
   .my_goal {
     width: 29%;
     margin-left: 0.7rem;
@@ -3948,7 +3947,7 @@ body {
   }
 }
 @media screen and (max-width: 650px) {
- /* .profil_page {
+  /* .profil_page {
     width: 100%;
   } */
   .responsive_footer_box {
@@ -4166,7 +4165,7 @@ body {
  media query Chief And Vice Chief by nayem
  ----------------------------------*/
 
- .media-chief-vicechief {
+.media-chief-vicechief {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -4180,9 +4179,14 @@ body {
  media query Cordinator And Team Leader by nayem
  ----------------------------------*/
 
-.media-cordinator-lead {
-  display: grid;
+ .media-cordinator-lead {
+  display: flex;
   grid-template-columns: repeat(4, 1fr);
+  /* justify-content: center; */
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 35px;
+  row-gap: 30px;
 }
 @media only screen and (max-width: 480px) {
   .media-cordinator-lead {
@@ -4199,7 +4203,6 @@ body {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 
 /*----------------------------------
  media query Executive Member by nayem
@@ -4227,5 +4230,126 @@ body {
 @media only screen and (min-width: 920px) and (max-width: 1024px) {
   .media-executive-member {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*----------------------------------
+ media query General Member by nayem
+ ----------------------------------*/
+
+.media-general-member {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+@media only screen and (max-width: 480px) {
+  .media-general-member {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .media-general-member {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .media-general-member {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (min-width: 920px) and (max-width: 1024px) {
+  .media-general-member {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*----------------------------------
+ media query News and Events by nayem
+ ----------------------------------*/
+.news-information {
+  padding: 0 2rem 0 0;
+}
+.news-heading {
+  font-weight: 900;
+}
+.media-news-and-events {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+.media-news-and-events img {
+  object-fit: cover;
+}
+@media only screen and (max-width: 480px) {
+  .news-information {
+    padding: 0px;
+  }
+  .news-heading {
+    font-size: 15px;
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .news-information {
+    padding: 0px;
+  }
+  .news-heading {
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .news-information {
+    padding: 15px;
+  }
+  .news-heading {
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 920px) and (max-width: 1024px) {
+  .news-information {
+    padding: 15px;
+  }
+  .news-heading {
+    padding: 10px 5px 0 0;
+  }
+  .media-news-and-events {
+    height: auto;
+  }
+}
+
+/*
+----------------------------------------
+ about us responsive design by nayem
+ ---------------------------------------- 
+*/
+.frequently-asked-questions {
+  display: flex;
+  justify-content: space-between;
+  gap: 5em;
+}
+@media only screen and (max-width: 480px) {
+  .frequently-asked-questions {
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+  .frequently-asked-questions {
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 680px) and (max-width: 920px) {
+  .frequently-asked-questions {
+    flex-direction: column;
   }
 }

@@ -57,19 +57,28 @@ if (elapsedMinutes < 60) {
     return `${elapsedYears} years ago`;
   }
       }
-      events.slice(0).reverse().map((evt)=>{   
-          const postTime = new Date(evt.date+"+00:00");
+      events.slice(0).reverse().map((evt)=>{
+        const date = new Date(evt.date);
+        const formattedDate = date.toISOString().split(".")[0];  
+          const postTime = new Date(formattedDate+"+00:00");
           const timeAgo = getTimeAgo(postTime);
           times.push(timeAgo)
       })
       const postDates=[]
       events.slice(0).reverse().map((evt)=>{   
-        const postTime = new Date(evt.date+"+00:00");
+        const date = new Date(evt.date);
+        const formattedDate = date.toISOString().split(".")[0];  
+          const postTime = new Date(formattedDate+"+00:00");
         const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
           timeZone: "Asia/Dhaka"
         });
-        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
-        postDates.push(bangladeshDateTime)
+       // const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+       const bdPostTime=bangladeshTimeZone.format(postTime)
+    const [month, day, year] = bdPostTime.split("/");
+    const formatted = `${day}/${month}/${year}`;
+        console.log("bdTime")
+        console.log(formatted)
+        postDates.push(formatted)
     })
       
       const reversed=events.slice(0).reverse().map(e=>e)
@@ -112,7 +121,7 @@ if (elapsedMinutes < 60) {
                                             </Card.Body>
                                         </Col>
                                         <Col className="col-3 event-img">
-                                            <Card.Img style={{ width: "250px", height: "140px", objectFit: "cover" }} src={ev.image} />
+                                            <Card.Img style={{ width: "250px", height: "140px", objectFit: "cover" }} src={ev.image[0]} />
                                         </Col>
                                     </Row>
                                 </div>

@@ -275,7 +275,7 @@ color: white!important;
   justify-content:center;
   flex-wrap: wrap;
 }
-.advisor,.teacher-trainer,.commitee-member{
+.advisor,.teacher-trainer{
   flex-basis: 45%;
   padding: 20px 10px;
   display: flex;
@@ -283,6 +283,7 @@ color: white!important;
   align-items: center;
   text-align: center;
 }
+.commitee-member{text-align: center;}
 .advisor img,.teacher-trainer img,.commitee-member img{
   width: 150px;
   height: 150px;

@@ -34,6 +34,7 @@ const BlogsScreen = () => {
       function getTimeAgo(givenDate) {
       
         const currentDate = new Date();
+        
 const diffInTime = currentDate - givenDate;
 const diffInMinutes = diffInTime / (1000 * 60);
 const diffInHours = diffInMinutes / 60;
@@ -60,19 +61,27 @@ if (elapsedMinutes < 60) {
   }
       }
       blogs.slice(0).reverse().map((blg)=>{   
-          const postTime = new Date(blg.date+"+00:00");
+        const date = new Date(blg.date);
+        const formattedDate = date.toISOString().split(".")[0];  
+          const postTime = new Date(formattedDate+"+00:00");
+        //  const postTime = new Date(blg.date+"+00:00");
           const timeAgo = getTimeAgo(postTime);
           times.push(timeAgo)
       })
       
       const postDates=[]
       blogs.slice(0).reverse().map((blg)=>{   
-        const postTime = new Date(blg.date+"+00:00");
+        const date = new Date(blg.date);
+        const formattedDate = date.toISOString().split(".")[0];  
+          const postTime = new Date(formattedDate+"+00:00");
         const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
           timeZone: "Asia/Dhaka"
         });
-        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
-        postDates.push(bangladeshDateTime)
+       // const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+        const bdPostTime=bangladeshTimeZone.format(postTime)
+    const [month, day, year] = bdPostTime.split("/");
+    const formatted = `${day}/${month}/${year}`;
+        postDates.push(formatted)
     })
 
       const reversed=blogs.slice(0).reverse().map(e=>e)
@@ -83,57 +92,56 @@ if (elapsedMinutes < 60) {
       const changePageNumber=(num)=>{
           setCurrentPage(num);
       }
-  
+    
     return (
-        <>
-            <Container className="d-flex justify-content-center">
-                <div className="mt-5">
-                    <div className='title-div partners mb-5'>
-                        <Separator />
-                        <div> <h3 className='text-center'>Blogs</h3></div>
-                        <Separator />
-                    </div>
-                    <div>
-                        {
-                            loading?<Loader/>:
-                            blogs && blogs.length > 0 &&
-                            curBlogs.map((blg, idx) => (
-                                <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-once="true" className='mb-4 border-2 border-bottom border-dark-subtle'>
-                                    <Row className="d-flex justify-content-between mb-4 single-event">
-                                        <Col>
-                                            <Card.Body>
-                                           
-                                                <Card.Title className='fw-bold text-justify'>{blg.title}</Card.Title>
-                                                <Card.Text style={{ textAlign: "justify" }}>
-                                                   {blg.description.split(" ").splice(0,50).join(" ")+
-                                        `.....`}
-                                        <Link to={`/blogs/${blg._id}`}>Read more</Link>
-                                                </Card.Text>
-                                                <small className="text-muted">{postDates[idx]}<span 
-                                                style={{marginLeft:"10px"}}>updated {times[idx]}</span></small>
-                                                <p className="text-muted">Written by:{blg.username}</p>
-                                            </Card.Body>
-                                        </Col>
-                                        <Col className="col-3 event-img">
-                                            <Card.Img style={{ width: "250px", height: "140px", objectFit: "cover" }} src={blg.image} />
-                                        </Col>
-                                    </Row>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-                
-            </Container>
-            <Container className='d-flex justify-content-center mb-5'>
-            <div className='d-flex justify-content-center my-5'>
-             {/* <PaginationComponent></PaginationComponent> */}
-             {(blogs.length>0) && <PaginationComponent membersPerPage={blogsPerPage} changePageNumber={changePageNumber}
-              totalMembers={blogs.length} currentPage={currentPage}/>}
-            </div>
-            </Container>
-        </>
+      <>
+      <Container className="d-flex justify-content-center">
+        <div className="mt-5">
+          <div className='title-div partners mb-5'>
+            <Separator />
+            <div> <h3 className='text-center'>Blogs</h3></div>
+            <Separator />
+          </div>
+          <div>
+            {
+              loading ? <Loader /> :
+                blogs && blogs.length > 0 &&
+                curBlogs.map((blg, idx) => (
+                  <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-once="true" className='mb-4 border-2 border-bottom border-dark-subtle'>
+                    <Row className="d-flex justify-content-between mb-4 single-event">
+                      <Col>
+                        <Card.Body>
 
+                          <Card.Title className='fw-bold text-justify'>{blg.title}</Card.Title>
+                          <Card.Text style={{ textAlign: "justify" }}>
+                            {blg.description.split(" ").splice(0, 50).join(" ") +
+                              `.....`}
+                            <Link to={`/blogs/${blg._id}`}>Read more</Link>
+                          </Card.Text>
+                          <small className="text-muted">{postDates[idx]}<span
+                            style={{ marginLeft: "10px" }}>updated {times[idx]}</span></small>
+                          <p className="text-muted fw-bold">Written by - <Link to={`/me/${blg.username}`} style={{ color: "Red" }}>{blg.username}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></p>
+                        </Card.Body>
+                      </Col>
+                      <Col className="col-3 event-img">
+                        <Card.Img style={{ width: "250px", height: "140px", objectFit: "cover" }} src={blg.image} />
+                      </Col>
+                    </Row>
+                  </div>
+                ))
+            }
+          </div>
+        </div>
+
+      </Container>
+      <Container className='d-flex justify-content-center mb-5'>
+        <div className='d-flex justify-content-center my-5'>
+          {/* <PaginationComponent></PaginationComponent> */}
+          {(blogs.length>0) && <PaginationComponent membersPerPage={blogsPerPage} changePageNumber={changePageNumber}
+              totalMembers={blogs.length} currentPage={currentPage}/>}
+        </div>
+      </Container>
+    </>
     );
 };
 

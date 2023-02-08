@@ -9,7 +9,7 @@ const AddEventScreen = () => {
     const navigate=useNavigate()
     const params=useParams();
     const [eventInfo, setEventInfo] = useState({
-        event_image:"",
+        event_image:[],
         title: "",
         description: ""
     })
@@ -33,10 +33,10 @@ const AddEventScreen = () => {
     const [successMessage, setSuccessMessage] = useState('')
     const handleSubmit = async (e) => {
         e.preventDefault()
-       
+       console.log(eventInfo)
         const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
 
-       if(eventInfo.title!=="" && eventInfo.event_image!=="" && 
+       if(eventInfo.title!==""  && 
        eventInfo.description!=="")
        {
         try {
@@ -48,13 +48,18 @@ const AddEventScreen = () => {
             }
 
             const formData=new FormData()
-     formData.append("event_image",eventInfo.event_image)
+            console.log(eventInfo.event_image.length)
+            for (let i = 0; i < eventInfo.event_image.length; i++) {
+                console.log(eventInfo.event_image[i])
+                formData.append("event_image", eventInfo.event_image[i]);
+              }
+     
      formData.append("title",eventInfo.title)
      formData.append("description",eventInfo.description)
      formData.append("date",eventInfo.date)
      
      
-            const { data } = await axios.post(`https://gray-awful-newt.cyclic.app/api/events`, formData, config)
+            const { data } = await axios.post("https://gray-awful-newt.cyclic.app/api/events", formData, config)
            
             if (data.success) {
                 setErrorMessage('')
@@ -78,7 +83,8 @@ const AddEventScreen = () => {
 
     const handleFileChange=(e)=>{
         const key = e.target.name;
-        setEventInfo({ ...eventInfo, [key]: e.target.files[0] })
+        console.log(e.target.files)
+        setEventInfo({ ...eventInfo, [key]: e.target.files })
     }
 
   return (
@@ -126,7 +132,7 @@ const AddEventScreen = () => {
                                             backgroundColor:'#3e83ab',
                                             color:"#ffffff"
                                     }} class="btn">Add event image</label>
-                                    <input type="file" id="files" style={{visibility:'hidden'}} onChange={handleFileChange} name="event_image" class="form-control"  />
+                                    <input type="file" id="files" style={{visibility:'hidden'}} onChange={handleFileChange} name="event_image" class="form-control"  multiple/>
                                 </div>
                                 
                             </div>
