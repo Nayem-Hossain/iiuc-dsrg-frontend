@@ -75,7 +75,7 @@ const BlogDetailsScreen = () => {
               }}
               text-align="center">
               {blogDetails.title}</h2>
-            <h4 className='d-block mb-5' >Written by : <Link to={`/me/${blogDetails.username}`} style={{ color: "Red" }}>{blogDetails.username}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></h4>
+            <h4 className='d-block mb-5' >Written by : <Link to={`/me/${blogDetails.username}`} style={{ color: "Red" }}>{blogDetails.name}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></h4>
 
 
             <p style={{ textAlign: "justify" }}>{blogDetails.description}</p>

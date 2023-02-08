@@ -120,7 +120,7 @@ if (elapsedMinutes < 60) {
                           </Card.Text>
                           <small className="text-muted">{postDates[idx]}<span
                             style={{ marginLeft: "10px" }}>updated {times[idx]}</span></small>
-                          <p className="text-muted fw-bold">Written by - <Link to={`/me/${blg.username}`} style={{ color: "Red" }}>{blg.username}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></p>
+                          <p className="text-muted fw-bold">Written by - <Link to={`/me/${blg.username}`} style={{ color: "Red" }}>{blg.name}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></p>
                         </Card.Body>
                       </Col>
                       <Col className="col-3 event-img">
