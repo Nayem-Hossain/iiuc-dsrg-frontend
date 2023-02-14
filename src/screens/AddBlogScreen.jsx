@@ -30,11 +30,30 @@ const AddBlogScreen = () => {
 
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
+    const [fullname,setFullname]=useState("")
+
+
+    useEffect(()=>{
+        if(userInfo){
+        const getMemberById = async () => {
+            try {
+              const response = await axios.get(`https://gray-awful-newt.cyclic.app/api/members/${userInfo.username}`);
+    
+              setFullname(response.data.name)
+            } catch (error) {
+            
+              setErrorMessage(error.response.data)
+            }
+          }
+          getMemberById()
+        }
+    },[userInfo])
+    //console.log(fullname)
     const handleSubmit = async (e) => {
         e.preventDefault()
        
         const user=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
-
+       
        if(blogInfo.title!=="" && blogInfo.blog_image!=="" && 
        blogInfo.description!=="")
        {
@@ -50,6 +69,7 @@ const AddBlogScreen = () => {
      formData.append("blog_image",blogInfo.blog_image)
      formData.append("title",blogInfo.title)
      formData.append("description",blogInfo.description)
+     formData.append("name",fullname)
      formData.append("username",user.username)
      formData.append("date",blogInfo.date)
      

@@ -58,18 +58,27 @@ const EventsAndNews = () => {
         }
     }
     events.slice(0).reverse().map((evt) => {
-        const postTime = new Date(evt.date + "+00:00");
+        const date = new Date(evt.date);
+        const formattedDate = date.toISOString().split(".")[0];
+        const postTime = new Date(formattedDate + "+00:00");
         const timeAgo = getTimeAgo(postTime);
         times.push(timeAgo)
     })
     const postDates = []
     events.slice(0).reverse().map((evt) => {
-        const postTime = new Date(evt.date + "+00:00");
+        const date = new Date(evt.date);
+        const formattedDate = date.toISOString().split(".")[0];
+        const postTime = new Date(formattedDate + "+00:00");
         const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
             timeZone: "Asia/Dhaka"
         });
-        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
-        postDates.push(bangladeshDateTime)
+        // const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+        const bdPostTime = bangladeshTimeZone.format(postTime)
+        const [month, day, year] = bdPostTime.split("/");
+        const formatted = `${day}/${month}/${year}`;
+        console.log("bdTime")
+        console.log(formatted)
+        postDates.push(formatted)
     })
 
     const reversed = events.slice(0).reverse().map(e => e)
@@ -91,26 +100,33 @@ const EventsAndNews = () => {
                         <Separator />
                     </div>
                     <div>
-                        {Array.from({ length: 5 }).map((_, idx) => (
-                            <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-once="true" className='mb-4 border-2 border-bottom border-dark-subtle'>
-                                <Row className="d-flex justify-content-between mb-4">
-                                    <Col>
-                                        <Card.Body>
-                                            <Card.Title className='fw-bold text-justify'>eSRD-Lab Team Visit to International Islamic University Chittagong for Collaboration</Card.Title>
-                                            <Card.Text style={{ textAlign: "justify" }}>
-                                                This is a longer card with supporting text below as a natural
-                                                lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </Card.Text>
-                                            <small className="text-muted">25-10-2022 : updated 3 mins ago</small>
-                                        </Card.Body>
-                                    </Col>
-                                    <Col className="col-3">
-                                        <Card.Img style={{ width: "250px", height: "140px", objectFit: "cover" }} src={EventsImg} />
-                                    </Col>
-                                </Row>
-                            </div>
-                        ))}
+                        {
+                            loading ? <Loader /> :
+                                events && events.length > 0 &&
+                                curEvents.map((ev, idx) => (
+                                    <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-once="true" className='mb-4 border-2 border-bottom border-dark-subtle'>
+                                        <Row className="d-flex justify-content-between mb-4 single-event">
+                                            <Col>
+                                                <Card.Body>
+                                                    <Card.Title className='fw-bold text-justify'>{ev.title}</Card.Title>
+                                                    <Card.Text style={{ textAlign: "justify" }}>
+                                                        {ev.description.split(" ").splice(0, 50).join(" ") +
+                                                            `.....`}
+                                                        <Link to={`/events/${ev._id}`}>Read more</Link>
+                                                    </Card.Text>
+                                                    <small className="text-muted">{
+                                                        postDates[idx]
+                                                    }<span
+                                                        style={{ marginLeft: "10px" }}>updated {times[idx]}</span></small>
+                                                </Card.Body>
+                                            </Col>
+                                            <Col className="col-3 event-img">
+                                                <Card.Img style={{ width: "250px", height: "140px", objectFit: "cover" }} src={ev.image[0]} />
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                ))
+                        }
                     </div>
                 </div>
 

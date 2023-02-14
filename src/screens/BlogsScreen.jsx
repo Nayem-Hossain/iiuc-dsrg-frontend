@@ -34,6 +34,7 @@ const BlogsScreen = () => {
   function getTimeAgo(givenDate) {
 
     const currentDate = new Date();
+
     const diffInTime = currentDate - givenDate;
     const diffInMinutes = diffInTime / (1000 * 60);
     const diffInHours = diffInMinutes / 60;
@@ -60,19 +61,27 @@ const BlogsScreen = () => {
     }
   }
   blogs.slice(0).reverse().map((blg) => {
-    const postTime = new Date(blg.date + "+00:00");
+    const date = new Date(blg.date);
+    const formattedDate = date.toISOString().split(".")[0];
+    const postTime = new Date(formattedDate + "+00:00");
+    //  const postTime = new Date(blg.date+"+00:00");
     const timeAgo = getTimeAgo(postTime);
     times.push(timeAgo)
   })
 
   const postDates = []
   blogs.slice(0).reverse().map((blg) => {
-    const postTime = new Date(blg.date + "+00:00");
+    const date = new Date(blg.date);
+    const formattedDate = date.toISOString().split(".")[0];
+    const postTime = new Date(formattedDate + "+00:00");
     const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
       timeZone: "Asia/Dhaka"
     });
-    const bangladeshDateTime = bangladeshTimeZone.format(postTime);
-    postDates.push(bangladeshDateTime)
+    // const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+    const bdPostTime = bangladeshTimeZone.format(postTime)
+    const [month, day, year] = bdPostTime.split("/");
+    const formatted = `${day}/${month}/${year}`;
+    postDates.push(formatted)
   })
 
   const reversed = blogs.slice(0).reverse().map(e => e)
@@ -111,7 +120,7 @@ const BlogsScreen = () => {
                           </Card.Text>
                           <small className="text-muted">{postDates[idx]}<span
                             style={{ marginLeft: "10px" }}>updated {times[idx]}</span></small>
-                          <p className="text-muted fw-bold">Written by - <Link to={`/me/${blg.username}`} style={{ color: "Red" }}>{blg.username}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></p>
+                          <p className="text-muted fw-bold">Written by - <Link to={`/me/${blg.username}`} style={{ color: "Red" }}>{blg.name}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></p>
                         </Card.Body>
                       </Col>
                       <Col className="col-3 event-img">
@@ -133,7 +142,6 @@ const BlogsScreen = () => {
         </div>
       </Container>
     </>
-
   );
 };
 

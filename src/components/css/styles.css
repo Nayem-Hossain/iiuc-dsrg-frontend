@@ -4180,9 +4180,13 @@ body {
  ----------------------------------*/
 
 .media-cordinator-lead {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(4, 1fr);
+  /* justify-content: center; */
+  flex-wrap: wrap;
   justify-content: center;
+  column-gap: 35px;
+  row-gap: 30px;
 }
 @media only screen and (max-width: 480px) {
   .media-cordinator-lead {

@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from '../assets/logo.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 import { faFacebook, faTwitter, faLinkedin, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 const Footer = () => {
     return (
@@ -30,13 +31,13 @@ const Footer = () => {
                                     <h3>Useful Links</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Blogs</a></li>
-                                    <li><a href="#">Publication</a></li>
-                                    <li><a href="#">About us</a></li>
-                                    <li><a href="#">Commitee Members</a></li>
-                                    <li><a href="#">Contact us</a></li>
-                                    <li><a href="#">Latest Events & News</a></li>
+                                    <li><Link to="/">Home</Link></li>
+                                    <li><Link to="/blogs">Blogs</Link></li>
+                                    <li><Link to="/publication">Publication</Link></li>
+                                    <li><Link to="/about">About us</Link></li>
+                                    <li><Link to="/commitee-members">Commitee Members</Link></li>
+                                    <li><Link to="/events-news">Latest Events & News</Link></li>
+
                                 </ul>
                             </div>
                         </div>

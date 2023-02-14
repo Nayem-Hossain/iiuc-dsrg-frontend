@@ -232,8 +232,9 @@ return dateB - dateA; */
     // const formattedDate = new Date(newDate).toLocaleDateString('en-GB');
     setMemberInfo({ ...memberInfo, [key]: newDate })
   }
+
   const handleGmailClick = () => {
-    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${memberDetails.email}`, "_blank");
+    window.location.href = `mailto:${memberDetails.email}`;
   };
   return (
     <>

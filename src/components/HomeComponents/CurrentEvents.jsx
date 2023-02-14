@@ -28,12 +28,17 @@ const CurrentEvents = () => {
     });
     const postDates = []
     events.map((evt) => {
-        const postTime = new Date(evt.date + "+00:00");
+        const date = new Date(evt.date);
+        const formattedDate = date.toISOString().split(".")[0];
+        const postTime = new Date(formattedDate + "+00:00");
         const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
             timeZone: "Asia/Dhaka"
         });
-        const bangladeshDateTime = bangladeshTimeZone.format(postTime);
-        postDates.push(bangladeshDateTime)
+        // const bangladeshDateTime = bangladeshTimeZone.format(postTime);
+        const bdPostTime = bangladeshTimeZone.format(postTime)
+        const [month, day, year] = bdPostTime.split("/");
+        const formatted = `${day}/${month}/${year}`;
+        postDates.push(formatted)
     })
     return (
         <Container className="my-5">
@@ -51,7 +56,7 @@ const CurrentEvents = () => {
                             <Col>
                                 <Card>
                                     <Card.Img variant="top"
-                                        style={{ height: '200px' }} src={ev.image} />
+                                        style={{ height: '200px' }} src={ev.image[0]} />
                                     <Card.Body style={{ height: "220px" }}>
                                         <Card.Title className='fw-bold text-justify'>{ev.title}</Card.Title>
                                         <Card.Text style={{ textAlign: "justify" }}>

@@ -36,12 +36,16 @@ const EventDetailsScreen = () => {
 useEffect(()=>{
   if(eventDetails.date)
   {
-    const postTime = new Date(eventDetails.date+"+00:00");
+    const date = new Date(eventDetails.date);
+        const formattedDate = date.toISOString().split(".")[0];  
+          const postTime = new Date(formattedDate+"+00:00");
   const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Dhaka"
   });
-  
-  setBdTime(bangladeshTimeZone.format(postTime))
+  const bdPostTime=bangladeshTimeZone.format(postTime)
+  const [month, day, year] = bdPostTime.split("/");
+  const formatted = `${day}/${month}/${year}`;
+  setBdTime(formatted)
   }
 },[eventDetails])
 
@@ -55,9 +59,15 @@ useEffect(()=>{
     alignItems:"center",
     padding:"20px 0px"}}>
         <div style={{
-            maxWidth:'600px',
+            //maxWidth:'600px',
         }}>
-        <img src={eventDetails.image} />
+          <div className='all-images' style={{display:'flex',flexWrap:'wrap',justifyContent:'center'}}>
+          
+            <img width={600} height={400} src={eventDetails.image &&eventDetails.image[0] } />
+        
+          
+          </div>
+       
         <span style={{display:'block',margin:'10px 0px',color:'rgb(114 114 114)',fontSize:'16px'}}>Posted on:{bdTime}</span>
         </div>
            <h3 
@@ -67,8 +77,14 @@ useEffect(()=>{
             text-align="center">
             {eventDetails.title}</h3>     
            
-        <p>{eventDetails.description}</p>
- 
+        <p style={{margin:'10px'}}>{eventDetails.description}</p>
+        <div className='all-images' style={{display:'flex',flexWrap:'wrap'}}>
+          {
+            eventDetails?.image?.map((Img,index)=>{
+            if(index>0)return  <img width={300} height={300} src={Img} />
+            })
+          }
+          </div>
     </div>
     
    }

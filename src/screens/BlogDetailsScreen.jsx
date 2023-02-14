@@ -4,6 +4,7 @@ import WithLayout from '../Layout/WithLayout'
 import Loader from '../components/CommonComponents/Loader'
 import axios from 'axios'
 import { Container } from 'react-bootstrap'
+
 const BlogDetailsScreen = () => {
   const [blogDetails, setblogDetails] = useState({})
   const params = useParams()
@@ -35,12 +36,16 @@ const BlogDetailsScreen = () => {
 
   useEffect(() => {
     if (blogDetails.date) {
-      const postTime = new Date(blogDetails.date + "+00:00");
+      const date = new Date(blogDetails.date);
+      const formattedDate = date.toISOString().split(".")[0];
+      const postTime = new Date(formattedDate + "+00:00");
       const bangladeshTimeZone = new Intl.DateTimeFormat("en-US", {
         timeZone: "Asia/Dhaka"
       });
-
-      setBdTime(bangladeshTimeZone.format(postTime))
+      const bdPostTime = bangladeshTimeZone.format(postTime)
+      const [month, day, year] = bdPostTime.split("/");
+      const formatted = `${day}/${month}/${year}`;
+      setBdTime(formatted)
     }
   }, [blogDetails])
 
@@ -69,7 +74,7 @@ const BlogDetailsScreen = () => {
               }}
               text-align="center">
               {blogDetails.title}</h2>
-            <h4 className='d-block mb-5' >Written by : <Link to={`/me/${blogDetails.username}`} style={{ color: "Red" }}>{blogDetails.username}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></h4>
+            <h4 className='d-block mb-5' >Written by : <Link to={`/me/${blogDetails.username}`} style={{ color: "Red" }}>{blogDetails.name}&nbsp;<i class="bi bi-arrow-up-right-square"></i></Link></h4>
 
 
             <p style={{ textAlign: "justify" }}>{blogDetails.description}</p>
